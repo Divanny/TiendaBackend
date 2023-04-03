@@ -19,7 +19,10 @@ namespace Model.Common
         [Required(ErrorMessage = "Debe seleccionar una contraseña válida")]
         public string Password { get; set; }
         public byte[] PasswordHash { get; set; }
-        public int Estado { get; set; }
+        public int idPerfil { get; set; }
+        public string Perfil { get; set; }
+        public int idEstado { get; set; }
+        public string Estado { get; set; }
         public System.DateTime FechaRegistro { get; set; }
         public System.DateTime UltimoIngreso { get; set; }
         public string Nombres { get; set; }

@@ -19,19 +19,18 @@ namespace WebAPI.Controllers
     [RoutePrefix("api/Usuarios")]
     public class UsuariosController : ApiController
     {
-        SessionManager session = new SessionManager();
         UsuariosRepo usuariosRepo = new UsuariosRepo();
         [HttpGet]
-        public List<Usuarios> Get()
+        public List<UsuariosModel> Get()
         {
-            return usuariosRepo.GetAll();
+            return usuariosRepo.Get().ToList();
         }
 
         // GET api/Usuarios/5
         [HttpGet]
-        public Usuarios Get(int id)
+        public UsuariosModel Get(int id)
         {
-            return usuariosRepo.GetByID(id);
+            return usuariosRepo.Get(x => x.idUsuario == id).FirstOrDefault();
         }
 
 
@@ -41,28 +40,21 @@ namespace WebAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                Usuarios usuario = usuariosRepo.GetByUsername(model.NombreUsuario);
+                UsuariosModel usuario = usuariosRepo.GetByUsername(model.NombreUsuario);
 
                 if (usuario != null)
                 {
                     return new OperationResult(false, "Este usuario ya está registrado");
                 }
 
-                model.PasswordHash = Cryptography.Encrypt(model.Password);
+                model.PasswordHash  = Cryptography.Encrypt(model.Password);
                 model.FechaRegistro = DateTime.Now;
                 model.UltimoIngreso = DateTime.Now;
 
-                var objectResult = usuariosRepo.Add(model);
-                if (objectResult != null)
-                {
-                    InsertarUsuario_Result created = objectResult.ElementAt(0);
-                    session.SaveUser(created.idUsuario);
-                    return new OperationResult(true, "Se ha registrado satisfactoriamente", created);
-                }
-                else
-                {
-                    return new OperationResult(false, "Error al registrar el usuario");
-                }
+                var created = usuariosRepo.Add(model);
+
+                session.SaveUser(created.idUsuario);
+                return new OperationResult(true, "Se ha registrado satisfactoriamente", created);
             }
             else
             {
@@ -79,7 +71,7 @@ namespace WebAPI.Controllers
         [Route("LogIn")]
         public LogInResult LogIn([FromBody] UsuariosModel logIn)
         {
-            Usuarios usuario = usuariosRepo.GetByUsername(logIn.NombreUsuario);
+            UsuariosModel usuario = usuariosRepo.GetByUsername(logIn.NombreUsuario);
 
             if (usuario == null)
             {
@@ -89,14 +81,14 @@ namespace WebAPI.Controllers
             logIn.PasswordHash = Cryptography.Encrypt(logIn.Password);
             bool passwordMatch = Cryptography.CompareByteArrays(logIn.PasswordHash, usuario.PasswordHash);
 
-            if ((logIn.NombreUsuario == usuario.NombreUsuario && passwordMatch) && usuario.Estado == (int)EstadoUsuarioEnum.Activo)
+            if ((logIn.NombreUsuario == usuario.NombreUsuario && passwordMatch) && usuario.idEstado == (int)EstadoUsuarioEnum.Activo)
             {
                 session.SaveUser(usuario.idUsuario);
                 return new LogInResult(true, "Ha iniciado sesión satisfactoriamente");
             }
             else
             {
-                if (usuario.Estado != (int)EstadoUsuarioEnum.Activo)
+                if (usuario.idEstado != (int)EstadoUsuarioEnum.Activo)
                 {
                     return new LogInResult(false, "Esta usuario está inactivado");
                 }
@@ -124,11 +116,11 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("GetOnlineUser")]
-        public Usuarios GetOnlineUser()
+        public UsuariosModel GetOnlineUser()
         {
             if (session.GetOnlineUserId() != 0)
             {
-                Usuarios usuario = usuariosRepo.GetByID(session.GetOnlineUserId());
+                UsuariosModel usuario = usuariosRepo.Get(x => x.idUsuario == session.GetOnlineUserId()).FirstOrDefault();
                 return usuario;
             }
             return null;
