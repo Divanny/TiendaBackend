@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TiendaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PasswordHash" Type="varbinary" MaxLength="32" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="UltimoIngreso" Type="datetime" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="InsertarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="CorreoElectronico" Type="varchar" Mode="In" />
+          <Parameter Name="PasswordHash" Type="varbinary" Mode="In" />
+          <Parameter Name="Estado" Type="int" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
+          <Parameter Name="UltimoIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="TiendaDBModelStoreContainer">
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TiendaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordHash" Type="Binary" MaxLength="32" FixedLength="false" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UltimoIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="TiendaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <FunctionImport Name="InsertarUsuario" ReturnType="Collection(TiendaDBModel.InsertarUsuario_Result)">
+            <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="PasswordHash" Mode="In" Type="Binary" />
+            <Parameter Name="Estado" Mode="In" Type="Int32" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="UltimoIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="InsertarUsuario_Result">
+          <Property Type="Int32" Name="idUsuario" Nullable="false" />
+          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
+          <Property Type="Binary" Name="PasswordHash" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="Estado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UltimoIngreso" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TiendaDBModelStoreContainer" CdmEntityContainer="TiendaDBEntities">
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="TiendaDBModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UltimoIngreso" ColumnName="UltimoIngreso" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertarUsuario" FunctionName="TiendaDBModel.Store.InsertarUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TiendaDBModel.InsertarUsuario_Result">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UltimoIngreso" ColumnName="UltimoIngreso" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

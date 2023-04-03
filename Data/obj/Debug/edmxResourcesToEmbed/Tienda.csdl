@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TiendaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PasswordHash" Type="Binary" MaxLength="32" FixedLength="false" Nullable="false" />
+    <Property Name="Estado" Type="Int32" Nullable="false" />
+    <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UltimoIngreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="TiendaDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <FunctionImport Name="InsertarUsuario" ReturnType="Collection(TiendaDBModel.InsertarUsuario_Result)">
+      <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+      <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+      <Parameter Name="PasswordHash" Mode="In" Type="Binary" />
+      <Parameter Name="Estado" Mode="In" Type="Int32" />
+      <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+      <Parameter Name="UltimoIngreso" Mode="In" Type="DateTime" />
+      <Parameter Name="Nombres" Mode="In" Type="String" />
+      <Parameter Name="Apellidos" Mode="In" Type="String" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="InsertarUsuario_Result">
+    <Property Type="Int32" Name="idUsuario" Nullable="false" />
+    <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
+    <Property Type="Binary" Name="PasswordHash" Nullable="false" MaxLength="32" />
+    <Property Type="Int32" Name="Estado" Nullable="false" />
+    <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="UltimoIngreso" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Telefono" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>

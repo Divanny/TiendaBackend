@@ -1,0 +1,14 @@
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\Data.dll.config
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\Data.dll
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\Data.pdb
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\EntityFramework.dll
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\Model.dll
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\Model.pdb
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\EntityFramework.xml
+D:\Software Projects\GestionEmpleado\Tienda\Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Software Projects\GestionEmpleado\Tienda\Data\obj\Debug\Data.csproj.AssemblyReference.cache
+D:\Software Projects\GestionEmpleado\Tienda\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
+D:\Software Projects\GestionEmpleado\Tienda\Data\obj\Debug\Data.csproj.CopyComplete
+D:\Software Projects\GestionEmpleado\Tienda\Data\obj\Debug\Data.dll
+D:\Software Projects\GestionEmpleado\Tienda\Data\obj\Debug\Data.pdb
