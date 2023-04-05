@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
-using NonActionAttribute = System.Web.Mvc.NonActionAttribute;
 
 namespace WebAPI.Infraestructure
 {
@@ -16,7 +15,7 @@ namespace WebAPI.Infraestructure
         {
             Validation = new ModelValidation();
         }
-        [NonAction]
+        [System.Web.Http.NonAction]
         public bool ValidateModel(object thing)
         {
             List<ValidationResult> errors = new List<ValidationResult>();

@@ -12,10 +12,12 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class EstadosUsuario
+    public partial class Vistas
     {
-        public int idEstado { get; set; }
+        public int idVista { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+        public string URL { get; set; }
+        public bool Principal { get; set; }
     }
 }

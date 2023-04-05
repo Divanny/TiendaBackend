@@ -25,6 +25,7 @@ namespace Model.Common
         public string Estado { get; set; }
         public System.DateTime FechaRegistro { get; set; }
         public System.DateTime UltimoIngreso { get; set; }
+        [Required(ErrorMessage = "Debe seleccionar su nombre")]
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string Telefono { get; set; }

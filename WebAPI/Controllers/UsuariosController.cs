@@ -1,5 +1,6 @@
 ﻿using Data;
 using Microsoft.Ajax.Utilities;
+using Model;
 using Model.Common;
 using Model.Enum;
 using System;
@@ -17,7 +18,7 @@ using WebAPI.Infraestructure;
 namespace WebAPI.Controllers
 {
     [RoutePrefix("api/Usuarios")]
-    public class UsuariosController : ApiController
+    public class UsuariosController : ApiBaseController
     {
         UsuariosRepo usuariosRepo = new UsuariosRepo();
         [HttpGet]
@@ -36,29 +37,52 @@ namespace WebAPI.Controllers
 
         // POST api/Usuarios
         [HttpPost]
-        public OperationResult Post(UsuariosModel model)
+        public OperationResult Post([FromBody]UsuariosModel model)
         {
-            if (ModelState.IsValid)
+            if (ValidateModel(model))
             {
                 UsuariosModel usuario = usuariosRepo.GetByUsername(model.NombreUsuario);
-
                 if (usuario != null)
                 {
                     return new OperationResult(false, "Este usuario ya está registrado");
                 }
 
                 model.PasswordHash  = Cryptography.Encrypt(model.Password);
+                model.idEstado = (int)EstadoUsuarioEnum.Activo;
                 model.FechaRegistro = DateTime.Now;
                 model.UltimoIngreso = DateTime.Now;
 
-                var created = usuariosRepo.Add(model);
+                if (model.idPerfil == null)
+                {
+                    model.idPerfil = (int)PerfilesEnum.Cliente;
+                }
 
-                session.SaveUser(created.idUsuario);
-                return new OperationResult(true, "Se ha registrado satisfactoriamente", created);
+                usuariosRepo.Add(model);
+                usuariosRepo.SaveChanges();
+
+                Credentials credentials = new Credentials()
+                {
+                    userName = model.NombreUsuario,
+                    password = model.Password
+                };
+
+                Authentication auth = new Authentication();
+                var result = auth.LogIn(credentials);
+
+                if (result.IsSuccessful)
+                {
+                    using (var dbc = new TiendaDBEntities())
+                    {
+                        var logger = new Data.Common.Logger(dbc);
+                        logger.LogHttpRequest(result.idUsuario, null);
+                    }
+                }
+
+                return new OperationResult(result.IsSuccessful, result.Message, result.UserValidated);
             }
             else
             {
-                return new OperationResult(false, "Los datos ingresados no son válidos");
+                return new OperationResult(false, "Los datos ingresados no son válidos", Validation.Errors);
             }
         }
 
@@ -66,64 +90,6 @@ namespace WebAPI.Controllers
         public void Put(int id, [FromBody] string value)
         {
 
-        }
-        [HttpPut]
-        [Route("LogIn")]
-        public LogInResult LogIn([FromBody] UsuariosModel logIn)
-        {
-            UsuariosModel usuario = usuariosRepo.GetByUsername(logIn.NombreUsuario);
-
-            if (usuario == null)
-            {
-                return new LogInResult(false, "Usuario no encontrado");
-            }
-
-            logIn.PasswordHash = Cryptography.Encrypt(logIn.Password);
-            bool passwordMatch = Cryptography.CompareByteArrays(logIn.PasswordHash, usuario.PasswordHash);
-
-            if ((logIn.NombreUsuario == usuario.NombreUsuario && passwordMatch) && usuario.idEstado == (int)EstadoUsuarioEnum.Activo)
-            {
-                session.SaveUser(usuario.idUsuario);
-                return new LogInResult(true, "Ha iniciado sesión satisfactoriamente");
-            }
-            else
-            {
-                if (usuario.idEstado != (int)EstadoUsuarioEnum.Activo)
-                {
-                    return new LogInResult(false, "Esta usuario está inactivado");
-                }
-
-                return new LogInResult(false, "Usuario y/o contraseña inválido");
-            }
-        }
-
-        [HttpPut]
-        [Route("LogOut")]
-        public LogInResult LogOut()
-        {
-            try
-            {
-                session.CleanSession();
-                return new LogInResult(true, "Ha cerrado sesión satisfactoriamente");
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-                return new LogInResult(false, "Error al cerrar sesión");
-            }
-        }
-
-        [HttpGet]
-        [Route("GetOnlineUser")]
-        public UsuariosModel GetOnlineUser()
-        {
-            if (session.GetOnlineUserId() != 0)
-            {
-                UsuariosModel usuario = usuariosRepo.Get(x => x.idUsuario == session.GetOnlineUserId()).FirstOrDefault();
-                return usuario;
-            }
-            return null;
         }
     }
 }

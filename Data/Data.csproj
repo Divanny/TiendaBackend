@@ -60,28 +60,20 @@
     <Compile Include="Administration\PerfilesRepo.cs" />
     <Compile Include="Common\Logger.cs" />
     <Compile Include="Common\ObjectsMapper.cs" />
+    <Compile Include="Common\OnlineUser.cs" />
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Administration\UsuariosRepo.cs" />
-    <Compile Include="DetallesFactura.cs">
-      <DependentUpon>TiendaTemp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EstadosUsuario.cs">
-      <DependentUpon>TiendaTemp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Factura.cs">
-      <DependentUpon>TiendaTemp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InsertarUsuario_Result.cs">
+    <Compile Include="EstadosUsuarios.cs">
       <DependentUpon>Tienda.tt</DependentUpon>
     </Compile>
     <Compile Include="LogActividad.cs">
-      <DependentUpon>TiendaTemp.tt</DependentUpon>
+      <DependentUpon>Tienda.tt</DependentUpon>
     </Compile>
-    <Compile Include="Perfile.cs">
-      <DependentUpon>TiendaTemp.tt</DependentUpon>
+    <Compile Include="Perfiles.cs">
+      <DependentUpon>Tienda.tt</DependentUpon>
     </Compile>
-    <Compile Include="Producto.cs">
-      <DependentUpon>TiendaTemp.tt</DependentUpon>
+    <Compile Include="PerfilesVistas.cs">
+      <DependentUpon>Tienda.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tienda.Context.cs">
@@ -99,25 +91,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tienda.edmx</DependentUpon>
     </Compile>
-    <Compile Include="TiendaTemp.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TiendaTemp.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TiendaTemp.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TiendaTemp.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TiendaTemp.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TiendaTemp.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Usuario.cs">
-      <DependentUpon>TiendaTemp.tt</DependentUpon>
-    </Compile>
     <Compile Include="Usuarios.cs">
+      <DependentUpon>Tienda.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas.cs">
       <DependentUpon>Tienda.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -130,13 +107,6 @@
     </EntityDeploy>
     <None Include="Tienda.edmx.diagram">
       <DependentUpon>Tienda.edmx</DependentUpon>
-    </None>
-    <EntityDeploy Include="TiendaTemp.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TiendaTemp.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="TiendaTemp.edmx.diagram">
-      <DependentUpon>TiendaTemp.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -158,16 +128,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Tienda.edmx</DependentUpon>
       <LastGenOutput>Tienda.cs</LastGenOutput>
-    </Content>
-    <Content Include="TiendaTemp.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TiendaTemp.edmx</DependentUpon>
-      <LastGenOutput>TiendaTemp.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="TiendaTemp.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TiendaTemp.edmx</DependentUpon>
-      <LastGenOutput>TiendaTemp.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

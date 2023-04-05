@@ -17,15 +17,16 @@ namespace WebAPI.Infraestructure
         public LogInResult LogIn(Credentials credentials)
         {
             LogInResult logInResult;
-            using (var dbc = new TiendaDBEntities1())
+            using (var dbc = new TiendaDBEntities())
             {
                 UsuariosRepo ur = new UsuariosRepo(dbc);
-                var usuario = ur.GetFirst(u => u.NombreUsuario == credentials.userName);
+                var usuarios = ur.Get().ToList();
+                var usuario = ur.GetFirst(x => x.idUsuario == 1);
 
                 if (usuario == null) return new LogInResult(false, "Usuario o contraseña invalidos");
 
-                credentials.PasswordHash = Cryptography.Encrypt(credentials.password);
-                bool passwordMatch = Cryptography.CompareByteArrays(credentials.PasswordHash, usuario.PasswordHash);
+                var PasswordHash = Cryptography.Encrypt(credentials.password);
+                bool passwordMatch = Cryptography.CompareByteArrays(PasswordHash, usuario.PasswordHash);
 
                 if (!passwordMatch) return new LogInResult(false, "La contraseña ingresada es incorrecta");
 

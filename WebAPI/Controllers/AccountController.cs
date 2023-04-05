@@ -48,18 +48,8 @@ namespace WebAPI.Controllers
                 vistas = vistas
             };
         }
-        [Route("MyProfile")]
-        [Autorizar(AllowAnyProfile = true)]
-        [HttpGet]
-        public object MyProfile(string userName)
-        {
-            using (UsuariosRepo ur = new UsuariosRepo())
-            {
-                var usuario = ur.GetFirst(u => u.NombreUsuario == userName);
-                return usuario;
-            };
-        }
         [Route("LogIn")]
+        [HttpPost]
         public OperationResult Post(Credentials credentials)
         {
             if (ValidateModel(credentials))
@@ -69,7 +59,7 @@ namespace WebAPI.Controllers
 
                 if (result.IsSuccessful)
                 {
-                    using (var dbc = new TiendaDBEntities1())
+                    using (var dbc = new TiendaDBEntities())
                     {
                         var logger = new Data.Common.Logger(dbc);
                         logger.LogHttpRequest(result.idUsuario, null);
@@ -81,6 +71,18 @@ namespace WebAPI.Controllers
             else
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
+        [Route("MyProfile")]
+        [Autorizar(AllowAnyProfile = true)]
+        [HttpGet]
+        public object MyProfile(string userName)
+        {
+            using (UsuariosRepo ur = new UsuariosRepo())
+            {
+                var usuario = ur.GetFirst(u => u.NombreUsuario == userName);
+                return usuario;
+            };
+        }
+
         [Route("LogOff")]
         public bool Put()
         {

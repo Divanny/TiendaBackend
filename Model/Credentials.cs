@@ -13,6 +13,5 @@ namespace Model
         public string userName { get; set; }
         [Required]
         public string password { get; set; }
-        public byte[] PasswordHash { get; set; }
     }
 }

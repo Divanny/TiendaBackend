@@ -18,7 +18,8 @@ namespace Data
         public string NombreUsuario { get; set; }
         public string CorreoElectronico { get; set; }
         public byte[] PasswordHash { get; set; }
-        public int Estado { get; set; }
+        public int idPerfil { get; set; }
+        public int idEstado { get; set; }
         public System.DateTime FechaRegistro { get; set; }
         public System.DateTime UltimoIngreso { get; set; }
         public string Nombres { get; set; }

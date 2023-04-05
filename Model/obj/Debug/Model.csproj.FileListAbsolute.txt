@@ -4,3 +4,9 @@ D:\Software Projects\GestionEmpleado\Tienda\Model\obj\Debug\Model.csproj.Assembl
 D:\Software Projects\GestionEmpleado\Tienda\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 D:\Software Projects\GestionEmpleado\Tienda\Model\obj\Debug\Model.dll
 D:\Software Projects\GestionEmpleado\Tienda\Model\obj\Debug\Model.pdb
+D:\Software Projects\TiendaBackend\Model\obj\Debug\Model.csproj.AssemblyReference.cache
+D:\Software Projects\TiendaBackend\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+D:\Software Projects\TiendaBackend\Model\obj\Debug\Model.dll
+D:\Software Projects\TiendaBackend\Model\obj\Debug\Model.pdb
+D:\Software Projects\TiendaBackend\Model\bin\Debug\Model.dll
+D:\Software Projects\TiendaBackend\Model\bin\Debug\Model.pdb

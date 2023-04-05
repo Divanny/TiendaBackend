@@ -4,8 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="36c277d32f714ffca94f0653e5fcbcd7" Name="Diagram1">
-        <EntityTypeShape EntityType="TiendaDBModel.Usuarios" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="d6eb20680ae14085b39039a477fa64d3" Name="Diagram1">
+        <EntityTypeShape EntityType="TiendaDBModel.EstadosUsuarios" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaDBModel.LogActividad" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaDBModel.Perfiles" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaDBModel.PerfilesVistas" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaDBModel.Usuarios" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaDBModel.Vistas" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

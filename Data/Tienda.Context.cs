@@ -12,10 +12,7 @@ namespace Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
-    using System.Data;
-
+    
     public partial class TiendaDBEntities : DbContext
     {
         public TiendaDBEntities()
@@ -28,47 +25,11 @@ namespace Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<EstadosUsuarios> EstadosUsuarios { get; set; }
+        public virtual DbSet<LogActividad> LogActividad { get; set; }
+        public virtual DbSet<Perfiles> Perfiles { get; set; }
+        public virtual DbSet<PerfilesVistas> PerfilesVistas { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-    
-        public virtual ObjectResult<InsertarUsuario_Result> InsertarUsuario(string nombreUsuario, string correoElectronico, byte[] passwordHash, Nullable<int> estado, Nullable<System.DateTime> fechaRegistro, Nullable<System.DateTime> ultimoIngreso, string nombres, string apellidos, string telefono)
-        {
-            var nombreUsuarioParameter = nombreUsuario != null ?
-                new ObjectParameter("NombreUsuario", nombreUsuario) :
-                new ObjectParameter("NombreUsuario", typeof(string));
-    
-            var correoElectronicoParameter = correoElectronico != null ?
-                new ObjectParameter("CorreoElectronico", correoElectronico) :
-                new ObjectParameter("CorreoElectronico", typeof(string));
-    
-            var passwordHashParameter = passwordHash != null ?
-                new ObjectParameter("PasswordHash", passwordHash) :
-                new ObjectParameter("PasswordHash", typeof(byte[]));
-    
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(int));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("FechaRegistro", SqlDbType.DateTime2) { Value = fechaRegistro.Value } :
-                new ObjectParameter("FechaRegistro", SqlDbType.DateTime2);
-
-            var ultimoIngresoParameter = ultimoIngreso.HasValue ?
-                new ObjectParameter("UltimoIngreso", SqlDbType.DateTime2) { Value = ultimoIngreso.Value } :
-                new ObjectParameter("UltimoIngreso", SqlDbType.DateTime2);
-
-            var nombresParameter = nombres != null ?
-                new ObjectParameter("Nombres", nombres) :
-                new ObjectParameter("Nombres", typeof(string));
-    
-            var apellidosParameter = apellidos != null ?
-                new ObjectParameter("Apellidos", apellidos) :
-                new ObjectParameter("Apellidos", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<InsertarUsuario_Result>("InsertarUsuario", nombreUsuarioParameter, correoElectronicoParameter, passwordHashParameter, estadoParameter, fechaRegistroParameter, ultimoIngresoParameter, nombresParameter, apellidosParameter, telefonoParameter);
-        }
+        public virtual DbSet<Vistas> Vistas { get; set; }
     }
 }

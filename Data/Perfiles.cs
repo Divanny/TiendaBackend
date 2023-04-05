@@ -12,11 +12,11 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Perfile
+    public partial class Perfiles
     {
         public int idPerfil { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<bool> PorDefecto { get; set; }
+        public bool PorDefecto { get; set; }
     }
 }

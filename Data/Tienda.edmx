@@ -4,7 +4,43 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TiendaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TiendaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EstadosUsuarios">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="LogActividad">
+          <Key>
+            <PropertyRef Name="idLog" />
+          </Key>
+          <Property Name="idLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URL" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="Metodo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Data" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfiles">
+          <Key>
+            <PropertyRef Name="idPerfil" />
+          </Key>
+          <Property Name="idPerfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" />
+          <Property Name="PorDefecto" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PerfilesVistas">
+          <Key>
+            <PropertyRef Name="idPerfilVista" />
+          </Key>
+          <Property Name="idPerfilVista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPerfil" Type="int" Nullable="false" />
+          <Property Name="idVista" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -13,32 +49,72 @@
           <Property Name="NombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="PasswordHash" Type="varbinary" MaxLength="32" Nullable="false" />
-          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="idPerfil" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="UltimoIngreso" Type="datetime" Nullable="false" />
           <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Apellidos" Type="varchar" MaxLength="50" />
           <Property Name="Telefono" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Function Name="InsertarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="NombreUsuario" Type="varchar" Mode="In" />
-          <Parameter Name="CorreoElectronico" Type="varchar" Mode="In" />
-          <Parameter Name="PasswordHash" Type="varbinary" Mode="In" />
-          <Parameter Name="Estado" Type="int" Mode="In" />
-          <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
-          <Parameter Name="UltimoIngreso" Type="datetime" Mode="In" />
-          <Parameter Name="Nombres" Type="varchar" Mode="In" />
-          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
-          <Parameter Name="Telefono" Type="varchar" Mode="In" />
-        </Function>
+        <EntityType Name="Vistas">
+          <Key>
+            <PropertyRef Name="idVista" />
+          </Key>
+          <Property Name="idVista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="URL" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Principal" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="TiendaDBModelStoreContainer">
+          <EntitySet Name="EstadosUsuarios" EntityType="Self.EstadosUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogActividad" EntityType="Self.LogActividad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PerfilesVistas" EntityType="Self.PerfilesVistas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vistas" EntityType="Self.Vistas" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TiendaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EstadosUsuarios">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LogActividad">
+          <Key>
+            <PropertyRef Name="idLog" />
+          </Key>
+          <Property Name="idLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfiles">
+          <Key>
+            <PropertyRef Name="idPerfil" />
+          </Key>
+          <Property Name="idPerfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PorDefecto" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PerfilesVistas">
+          <Key>
+            <PropertyRef Name="idPerfilVista" />
+          </Key>
+          <Property Name="idPerfilVista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPerfil" Type="Int32" Nullable="false" />
+          <Property Name="idVista" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -47,7 +123,8 @@
           <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PasswordHash" Type="Binary" MaxLength="32" FixedLength="false" Nullable="false" />
-          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="idPerfil" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UltimoIngreso" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -55,37 +132,69 @@
           <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="TiendaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EstadosUsuarios" EntityType="Self.EstadosUsuarios" />
+          <EntitySet Name="LogActividad" EntityType="Self.LogActividad" />
+          <EntitySet Name="Perfiles" EntityType="Self.Perfiles" />
+          <EntitySet Name="PerfilesVistas" EntityType="Self.PerfilesVistas" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
-          <FunctionImport Name="InsertarUsuario" ReturnType="Collection(TiendaDBModel.InsertarUsuario_Result)">
-            <Parameter Name="NombreUsuario" Mode="In" Type="String" />
-            <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
-            <Parameter Name="PasswordHash" Mode="In" Type="Binary" />
-            <Parameter Name="Estado" Mode="In" Type="Int32" />
-            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
-            <Parameter Name="UltimoIngreso" Mode="In" Type="DateTime" />
-            <Parameter Name="Nombres" Mode="In" Type="String" />
-            <Parameter Name="Apellidos" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-          </FunctionImport>
+          <EntitySet Name="Vistas" EntityType="TiendaDBModel.Vistas" />
         </EntityContainer>
-        <ComplexType Name="InsertarUsuario_Result">
-          <Property Type="Int32" Name="idUsuario" Nullable="false" />
-          <Property Type="String" Name="NombreUsuario" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="CorreoElectronico" Nullable="false" MaxLength="100" />
-          <Property Type="Binary" Name="PasswordHash" Nullable="false" MaxLength="32" />
-          <Property Type="Int32" Name="Estado" Nullable="false" />
-          <Property Type="DateTime" Name="FechaRegistro" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="UltimoIngreso" Nullable="false" Precision="23" />
-          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="50" />
-        </ComplexType>
+        <EntityType Name="Vistas">
+          <Key>
+            <PropertyRef Name="idVista" />
+          </Key>
+          <Property Name="idVista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Principal" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TiendaDBModelStoreContainer" CdmEntityContainer="TiendaDBEntities">
+          <EntitySetMapping Name="EstadosUsuarios">
+            <EntityTypeMapping TypeName="TiendaDBModel.EstadosUsuarios">
+              <MappingFragment StoreEntitySet="EstadosUsuarios">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogActividad">
+            <EntityTypeMapping TypeName="TiendaDBModel.LogActividad">
+              <MappingFragment StoreEntitySet="LogActividad">
+                <ScalarProperty Name="idLog" ColumnName="idLog" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfiles">
+            <EntityTypeMapping TypeName="TiendaDBModel.Perfiles">
+              <MappingFragment StoreEntitySet="Perfiles">
+                <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="PorDefecto" ColumnName="PorDefecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PerfilesVistas">
+            <EntityTypeMapping TypeName="TiendaDBModel.PerfilesVistas">
+              <MappingFragment StoreEntitySet="PerfilesVistas">
+                <ScalarProperty Name="idPerfilVista" ColumnName="idPerfilVista" />
+                <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+                <ScalarProperty Name="idVista" ColumnName="idVista" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="TiendaDBModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
@@ -93,7 +202,8 @@
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="UltimoIngreso" ColumnName="UltimoIngreso" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />
@@ -102,22 +212,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="InsertarUsuario" FunctionName="TiendaDBModel.Store.InsertarUsuario">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TiendaDBModel.InsertarUsuario_Result">
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
-                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="UltimoIngreso" ColumnName="UltimoIngreso" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <EntitySetMapping Name="Vistas">
+            <EntityTypeMapping TypeName="TiendaDBModel.Vistas">
+              <MappingFragment StoreEntitySet="Vistas">
+                <ScalarProperty Name="Principal" ColumnName="Principal" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idVista" ColumnName="idVista" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

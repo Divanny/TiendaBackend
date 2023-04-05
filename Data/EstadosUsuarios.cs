@@ -12,10 +12,10 @@ namespace Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Factura
+    public partial class EstadosUsuarios
     {
-        public int idFactura { get; set; }
-        public int idUsuario { get; set; }
-        public System.DateTime FechaFactura { get; set; }
+        public int idEstado { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
     }
 }

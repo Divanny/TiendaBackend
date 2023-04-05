@@ -19,7 +19,6 @@ namespace WebAPI.Controllers
     [RoutePrefix("api/Session")]
     public class SessionController : ApiController
     {
-        SessionManager session = new SessionManager();
         [HttpGet]
         [Route("GetSessionState")]
         public IHttpActionResult GetSessionState()

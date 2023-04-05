@@ -16,7 +16,7 @@ namespace Data
     {
         public UsuariosRepo(DbContext dbContext = null) : base
         (
-            dbContext ?? new TiendaDBEntities1(),
+            dbContext ?? new TiendaDBEntities(),
             new ObjectsMapper<UsuariosModel, Usuarios>(u => new Usuarios()
             {
                 idUsuario = u.idUsuario,
@@ -30,9 +30,9 @@ namespace Data
                 FechaRegistro = u.FechaRegistro,
                 UltimoIngreso = u.UltimoIngreso
             }),
-            (DB, filter) => from u in DB.Set<Usuarios>().Where(filter)
-                            join p in DB.Set<Perfile>() on u.idPerfil equals p.idPerfil
-                            join e in DB.Set<EstadosUsuario>() on u.idEstado equals e.idEstado
+            (DB, filter) => (from u in DB.Set<Usuarios>().Where(filter)
+                            join p in DB.Set<Perfiles>() on u.idPerfil equals p.idPerfil
+                            join e in DB.Set<EstadosUsuarios>() on u.idEstado equals e.idEstado
                             select new UsuariosModel()
                             {
                                 idUsuario = u.idUsuario,
@@ -41,19 +41,21 @@ namespace Data
                                 NombreUsuario = u.NombreUsuario,
                                 CorreoElectronico = u.CorreoElectronico,
                                 PasswordHash = u.PasswordHash,
-                                idPerfil = u.idPerfil,
-                                Perfil = p.Nombre,
-                                idEstado = u.idEstado,
-                                Estado = e.Nombre,
+                                //idPerfil = u.idPerfil,
+                                idPerfil = 1,
+                                //Perfil = p.Nombre,
+                                //idEstado = u.idEstado,
+                                idEstado = 1,
+                                //Estado = e.Nombre,
                                 FechaRegistro = u.FechaRegistro,
                                 UltimoIngreso = u.UltimoIngreso
-                            }
+                            })
         )
         { }
 
         public UsuariosModel GetByUsername(string nombreUsuario)
         {
-            return base.Get(x => x.NombreUsuario == nombreUsuario).FirstOrDefault();
+            return this.Get(x => x.NombreUsuario == nombreUsuario).FirstOrDefault();
         }
 
         public UsuariosModel Get(int id)

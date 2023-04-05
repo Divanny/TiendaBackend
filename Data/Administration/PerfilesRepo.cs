@@ -5,31 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Data.Common;
-using Model.Administration;
 using Model.Common;
 using Model.Enum;
 
 namespace Data
 {
-    public class PerfilesRepo: Repository<Perfile, PerfilesModel>
+    public class PerfilesRepo: Repository<Perfiles, PerfilesModel>
     {
         public PerfilesRepo(DbContext dbContext = null) : base
             (
-                dbContext ?? new TiendaDBEntities1(),
-                new ObjectsMapper<PerfilesModel, Perfile>(p => new Perfile() {
+                dbContext ?? new TiendaDBEntities(),
+                new ObjectsMapper<PerfilesModel, Perfiles>(p => new Perfiles() {
                     Descripcion = p.Descripcion,
                     idPerfil = p.idPerfil,
                     Nombre = p.Nombre,
                     PorDefecto = p.PorDefecto
                 }),
-                (DB, filter) =>  (from p in DB.Set<Perfile>().Where(filter)
+                (DB, filter) =>  (from p in DB.Set<Perfiles>().Where(filter)
                                  select new PerfilesModel()
                                  {
                                      Descripcion = p.Descripcion,
                                      idPerfil = p.idPerfil,
                                      Nombre = p.Nombre,
                                      CantPermisos = DB.Set<PerfilesVistas>().Count(a => a.idPerfil == p.idPerfil),
-                                     PorDefecto = p.PorDefecto ?? false
+                                     PorDefecto = p.PorDefecto
                                  })
             )
         { 
@@ -45,50 +44,34 @@ namespace Data
         {
             int id = idPerfil ?? 0;
             var permisosSet = dbContext.Set<PerfilesVistas>().Where(p => p.idPerfil == id);
-            return from a in dbContext.Set<Areas>()
-                   join m in dbContext.Set<Modulos>() on a.idArea equals m.idArea
-                   join v in dbContext.Set<Vistas>() on m.idModulo equals v.idModulo
-                   orderby a.Orden
+            return from v in dbContext.Set<Vistas>()
                    select new VistasModel()
                    {
-                       idArea = a.idArea,
-                       Area = a.Nombre,
-                       DescArea = a.Descripcion,
-                       IconoArea = a.IconClass,
-                       OrdenArea = a.Orden,
-                       idModulo = m.idModulo,
-                       Modulo = m.Nombre,
-                       DescModulo = m.Descripcion,
-                       IconoModulo = m.IconClass,
-                       OrdenModulo = m.Orden,
                        idVista = v.idVista,
                        Vista = v.Nombre,
                        DescVista = v.Descripcion,
-                       IconoVista = v.Descripcion,
-                       Url = v.Url,
+                       URL = v.URL,
                        Permiso = permisosSet.Any(a => a.idVista == v.idVista),
-                       Principal = v.Principal,
-                       SoloSupervisores = v.SoloSupervisores ?? false
+                       Principal = v.Principal
                    };
         }
         public IEnumerable<UsuariosModel> GetUsuarios(int idPerfil)
         {
             return from u in dbContext.Set<Usuarios>().Where(u => u.idPerfil == idPerfil)
-                   join uo in dbContext.Set<UnidadOrg>() on u.idUnidadOrg equals uo.idUnidadOrg
-                   select new UsuarioModel() 
+                   select new UsuariosModel() 
                    { 
-                        idUnidadOrg = u.idUnidadOrg,
-                        UnidadOrg = uo.Nombre,
-                        Activo = u.Activo,
-                        Apellidos = u.Apellidos,
-                        Cdula = u.Cdula,
                         idPerfil = u.idPerfil,
                         idUsuario = u.idUsuario,
                         Nombres = u.Nombres,
-                        NombreUsuario = u.NombreUsuario
+                        Apellidos = u.Apellidos,
+                        NombreUsuario = u.NombreUsuario,
+                        CorreoElectronico = u.CorreoElectronico,
+                        idEstado = u.idEstado,
+                        UltimoIngreso = u.UltimoIngreso,
+                        Telefono = u.Telefono,
                    };
         }
-        public override Perfile Add(PerfilesModel model)
+        public override Perfiles Add(PerfilesModel model)
         {
             using (var trx = dbContext.Database.BeginTransaction())
             {
@@ -228,10 +211,6 @@ namespace Data
         public bool CanDelete(int id)
         {
             return !dbContext.Set<Usuarios>().Any(a => a.idPerfil == id);
-        }
-        public IEnumerable<TipoPerfil> GetTiposPerfil()
-        {
-            return dbContext.Set<TipoPerfil>();
         }
     }
 }
