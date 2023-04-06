@@ -33,7 +33,7 @@ namespace Data.Common
         {
             LogActividad log = new LogActividad()
             {
-                URL = HttpContext.Current.Request.Url.ToString(),
+                URL = HttpContext.Current.Request.RawUrl.ToString(),
                 idUsuario = idUsuario,
                 Metodo = HttpContext.Current.Request.HttpMethod.ToString(),
                 Fecha = DateTime.Now,

@@ -20,8 +20,7 @@ namespace WebAPI.Infraestructure
             using (var dbc = new TiendaDBEntities())
             {
                 UsuariosRepo ur = new UsuariosRepo(dbc);
-                var usuarios = ur.Get().ToList();
-                var usuario = ur.GetFirst(x => x.idUsuario == 1);
+                var usuario = ur.GetFirst(x => x.NombreUsuario == credentials.userName);
 
                 if (usuario == null) return new LogInResult(false, "Usuario o contraseña invalidos");
 

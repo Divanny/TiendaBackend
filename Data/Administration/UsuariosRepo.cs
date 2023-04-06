@@ -41,12 +41,10 @@ namespace Data
                                 NombreUsuario = u.NombreUsuario,
                                 CorreoElectronico = u.CorreoElectronico,
                                 PasswordHash = u.PasswordHash,
-                                //idPerfil = u.idPerfil,
-                                idPerfil = 1,
-                                //Perfil = p.Nombre,
-                                //idEstado = u.idEstado,
-                                idEstado = 1,
-                                //Estado = e.Nombre,
+                                idPerfil = u.idPerfil,
+                                Perfil = p.Nombre,
+                                idEstado = u.idEstado,
+                                Estado = e.Nombre,
                                 FechaRegistro = u.FechaRegistro,
                                 UltimoIngreso = u.UltimoIngreso
                             })

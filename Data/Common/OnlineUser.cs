@@ -6,7 +6,7 @@ namespace Data.Common
     {
         public static int GetUserId()
         {
-            var a = HttpContext.Current.User.Identity.Name;
+            var a = HttpContext.Current;
             return 1;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Common;
 using Microsoft.Ajax.Utilities;
 using Model.Common;
 using Model.Enum;
@@ -37,6 +38,17 @@ namespace WebAPI.Controllers
                 Keys = session.Keys
             };
             return Ok(sessionData);
+        }
+
+        [Autorizar(AllowAnyProfile = true)]
+        [HttpGet]
+        [Route("GetOnlineUser")]
+        public UsuariosModel GetOnlineUser()
+        {
+            UsuariosRepo usuariosRepo = new UsuariosRepo();
+            var model = usuariosRepo.Get(x => x.idUsuario == Infraestructure.OnlineUser.GetUserId()).FirstOrDefault();
+
+            return model;
         }
     }
 

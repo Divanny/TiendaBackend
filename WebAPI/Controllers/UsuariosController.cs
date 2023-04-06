@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
                 model.FechaRegistro = DateTime.Now;
                 model.UltimoIngreso = DateTime.Now;
 
-                if (model.idPerfil == null)
+                if (model.idPerfil == 0)
                 {
                     model.idPerfil = (int)PerfilesEnum.Cliente;
                 }
@@ -87,9 +87,33 @@ namespace WebAPI.Controllers
         }
 
         // PUT api/Usuarios/5
-        public void Put(int id, [FromBody] string value)
+        public OperationResult Put([FromBody] UsuariosModel model)
         {
+            if (ValidateModel(model))
+            {
+                UsuariosModel usuario = usuariosRepo.GetByUsername(model.NombreUsuario);
 
+                if (usuario != null)
+                {
+                    return new OperationResult(false, "Este usuario ya existe");
+                }
+
+                model.PasswordHash = Cryptography.Encrypt(model.Password);
+                model.FechaRegistro = DateTime.Now;
+                model.UltimoIngreso = DateTime.Now;
+
+                if (model.idPerfil == 0)
+                {
+                    model.idPerfil = (int)PerfilesEnum.Cliente;
+                }
+
+                usuariosRepo.Edit(model);
+                return new OperationResult(true, "Se ha actualizado satisfactoriamente");
+            }
+            else
+            {
+                return new OperationResult(false, "Los datos ingresados no son válidos", Validation.Errors);
+            }
         }
     }
 }
