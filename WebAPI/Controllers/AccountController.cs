@@ -50,12 +50,19 @@ namespace WebAPI.Controllers
         }
         [Route("LogIn")]
         [HttpPost]
+        //public OperationResult Post(string userName, string password)
         public OperationResult Post(Credentials credentials)
         {
+            //Credentials credentials = new Credentials()
+            //{
+            //    userName = userName,
+            //    password = password,
+            //};
+
             if (ValidateModel(credentials))
             {
                 Authentication auth = new Authentication();
-                var result = auth.LogIn(credentials);
+                LogInResult result = auth.LogIn(credentials);
 
                 if (result.IsSuccessful)
                 {
@@ -66,7 +73,7 @@ namespace WebAPI.Controllers
                     }
                 }
 
-                return new OperationResult(result.IsSuccessful, result.Message, result.UserValidated);
+                return new OperationResult(result.IsSuccessful, result.Message, result.UserValidated, result.Token);
             }
             else
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);

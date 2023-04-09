@@ -64,49 +64,49 @@
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Administration\UsuariosRepo.cs" />
     <Compile Include="EstadosUsuarios.cs">
-      <DependentUpon>Tienda.tt</DependentUpon>
+      <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="LogActividad.cs">
-      <DependentUpon>Tienda.tt</DependentUpon>
+      <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Perfiles.cs">
-      <DependentUpon>Tienda.tt</DependentUpon>
+      <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="PerfilesVistas.cs">
-      <DependentUpon>Tienda.tt</DependentUpon>
+      <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tienda.Context.cs">
+    <Compile Include="TiendaDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Tienda.Context.tt</DependentUpon>
+      <DependentUpon>TiendaDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tienda.cs">
+    <Compile Include="TiendaDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Tienda.tt</DependentUpon>
+      <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Tienda.Designer.cs">
+    <Compile Include="TiendaDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Tienda.edmx</DependentUpon>
+      <DependentUpon>TiendaDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.cs">
-      <DependentUpon>Tienda.tt</DependentUpon>
+      <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Vistas.cs">
-      <DependentUpon>Tienda.tt</DependentUpon>
+      <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="Tienda.edmx">
+    <EntityDeploy Include="TiendaDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Tienda.Designer.cs</LastGenOutput>
+      <LastGenOutput>TiendaDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Tienda.edmx.diagram">
-      <DependentUpon>Tienda.edmx</DependentUpon>
+    <None Include="TiendaDB.edmx.diagram">
+      <DependentUpon>TiendaDB.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -119,15 +119,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Tienda.Context.tt">
+    <Content Include="TiendaDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Tienda.edmx</DependentUpon>
-      <LastGenOutput>Tienda.Context.cs</LastGenOutput>
+      <DependentUpon>TiendaDB.edmx</DependentUpon>
+      <LastGenOutput>TiendaDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Tienda.tt">
+    <Content Include="TiendaDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Tienda.edmx</DependentUpon>
-      <LastGenOutput>Tienda.cs</LastGenOutput>
+      <DependentUpon>TiendaDB.edmx</DependentUpon>
+      <LastGenOutput>TiendaDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

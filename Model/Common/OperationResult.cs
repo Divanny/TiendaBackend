@@ -11,6 +11,7 @@ namespace Model.Common
         public bool Success { get; set; }
         public string Message { get; set; }
         public object Data { get; set; }
+        public string Token { get; set; }
         public OperationResult(bool success, string message, object data)
         {
             Success = success;
@@ -21,6 +22,13 @@ namespace Model.Common
         {
             Success = success;
             Message = message;
+        }
+        public OperationResult(bool success, string message, object data, string token)
+        {
+            Success = success;
+            Message = message;
+            Data = data;
+            Token = token;
         }
     }
 }   

@@ -30,7 +30,7 @@ namespace WebAPI.Infraestructure
         }
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            //Se obtiene el estado de sesion desde la cookie
+            //Se obtiene el estado de sesion desde la cookie o el token
             var sesionInfo = SessionData.Get();
             sesionStatus = sesionInfo.Estado;
             //Se establese el id de usuario en el HttpContext

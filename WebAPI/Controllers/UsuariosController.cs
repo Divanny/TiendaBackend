@@ -22,6 +22,7 @@ namespace WebAPI.Controllers
     {
         UsuariosRepo usuariosRepo = new UsuariosRepo();
         [HttpGet]
+        [Autorizar(AllowAnyProfile = true)]
         public List<UsuariosModel> Get()
         {
             return usuariosRepo.Get().ToList();
@@ -29,6 +30,7 @@ namespace WebAPI.Controllers
 
         // GET api/Usuarios/5
         [HttpGet]
+        [Autorizar(AllowAnyProfile = true)]
         public UsuariosModel Get(int id)
         {
             return usuariosRepo.Get(x => x.idUsuario == id).FirstOrDefault();
@@ -78,7 +80,7 @@ namespace WebAPI.Controllers
                     }
                 }
 
-                return new OperationResult(result.IsSuccessful, result.Message, result.UserValidated);
+                return new OperationResult(result.IsSuccessful, result.Message, result.UserValidated, result.Token);
             }
             else
             {
@@ -87,25 +89,16 @@ namespace WebAPI.Controllers
         }
 
         // PUT api/Usuarios/5
-        public OperationResult Put([FromBody] UsuariosModel model)
+        [Autorizar(AllowAnyProfile = true)]
+        [HttpPut]
+        public OperationResult Put(int idUsuario, [FromBody] UsuariosModel model)
         {
             if (ValidateModel(model))
             {
-                UsuariosModel usuario = usuariosRepo.GetByUsername(model.NombreUsuario);
-
-                if (usuario != null)
-                {
-                    return new OperationResult(false, "Este usuario ya existe");
-                }
+                UsuariosModel usuario = usuariosRepo.Get(x => x.idUsuario == idUsuario).FirstOrDefault();
 
                 model.PasswordHash = Cryptography.Encrypt(model.Password);
-                model.FechaRegistro = DateTime.Now;
                 model.UltimoIngreso = DateTime.Now;
-
-                if (model.idPerfil == 0)
-                {
-                    model.idPerfil = (int)PerfilesEnum.Cliente;
-                }
 
                 usuariosRepo.Edit(model);
                 return new OperationResult(true, "Se ha actualizado satisfactoriamente");

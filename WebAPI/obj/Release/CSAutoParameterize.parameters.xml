@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="TiendaDBEntities-Web.config Connection String" description="TiendaDBEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/TiendaDB.csdl|res://*/TiendaDB.ssdl|res://*/TiendaDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=35.222.215.37;initial catalog=TiendaDB;user id=sqlserver;password=t13nd4;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Software\ Projects\\TiendaBackend\\WebAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TiendaDBEntities']/@connectionString" />
+  </parameter>
+</parameters>

@@ -12,6 +12,8 @@ namespace Model.Common
         public string Message { get; set; }
         public bool UserValidated { get; set; }
         public int idUsuario { get; set; }
+        public string Token { get; set; }
+
 
         public LogInResult(bool success, string message)
         {
@@ -30,6 +32,13 @@ namespace Model.Common
             this.Message = message;
             this.UserValidated = userValidated;
             this.idUsuario = idUsuario;
+        }
+        public LogInResult(bool success, string message, bool userValidated, int idUsuario, string token)
+        {
+            this.IsSuccessful = success;
+            this.Message = message;
+            this.UserValidated = userValidated;
+            this.Token = token;
         }
     }
 

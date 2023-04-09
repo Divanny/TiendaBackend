@@ -20,7 +20,7 @@ namespace WebAPI.Infraestructure
             using (var dbc = new TiendaDBEntities())
             {
                 UsuariosRepo ur = new UsuariosRepo(dbc);
-                var usuario = ur.GetFirst(x => x.NombreUsuario == credentials.userName);
+                var usuario = ur.GetFirst(x => x.NombreUsuario.Trim() == ((credentials.userName).Trim()));
 
                 if (usuario == null) return new LogInResult(false, "Usuario o contraseña invalidos");
 
@@ -35,9 +35,8 @@ namespace WebAPI.Infraestructure
                 
                 if (usuario.idEstado == (int)EstadoUsuarioEnum.Inactivo) return new LogInResult(false, "<i class='fas fa-lock'></i> El usuario <strong>" + credentials.userName + "</strong> está inactivo");
 
-                logInResult = new LogInResult(true, "Exito al iniciar sesión", true, usuario.idUsuario);
-
-                SessionData.Set(new UserSesionInfo() { idUsuario = usuario.idUsuario.ToString(), idPerfil = usuario.idPerfil.ToString() });
+                var token = SessionData.Set(new UserSesionInfo() { idUsuario = usuario.idUsuario.ToString(), idPerfil = usuario.idPerfil.ToString() });
+                logInResult = new LogInResult(true, "Exito al iniciar sesión", true, usuario.idUsuario, token);
             }
             return logInResult;
         }
