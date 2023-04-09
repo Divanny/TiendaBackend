@@ -28,3 +28,7 @@ D:\Software Projects\TiendaBackend\Data\obj\Debug\Data.csproj.CoreCompileInputs.
 D:\Software Projects\TiendaBackend\Data\obj\Debug\Data.csproj.CopyComplete
 D:\Software Projects\TiendaBackend\Data\obj\Debug\Data.dll
 D:\Software Projects\TiendaBackend\Data\obj\Debug\Data.pdb
+D:\Software Projects\TiendaBackend\Data\bin\Debug\BouncyCastle.Crypto.dll
+D:\Software Projects\TiendaBackend\Data\bin\Debug\itextsharp.dll
+D:\Software Projects\TiendaBackend\Data\bin\Debug\itextsharp.xml
+D:\Software Projects\TiendaBackend\Data\bin\Debug\itextsharp.xmlworker.dll

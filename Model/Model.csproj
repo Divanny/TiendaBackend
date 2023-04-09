@@ -48,6 +48,7 @@
     <Compile Include="Common\UsuariosModel.cs" />
     <Compile Include="Common\VistasModel.cs" />
     <Compile Include="Credentials.cs" />
+    <Compile Include="Enum\VistasEnum.cs" />
     <Compile Include="Enum\EstadoUsuarioEnum.cs" />
     <Compile Include="Enum\PerfilesEnum.cs" />
     <Compile Include="Identity.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 
 namespace Data.Common
 {
@@ -6,8 +7,8 @@ namespace Data.Common
     {
         public static int GetUserId()
         {
-            var a = HttpContext.Current;
-            return 1;
+            var userID = Convert.ToInt32(HttpContext.Current.User.Identity.Name);
+            return userID;
         }
     }
 }

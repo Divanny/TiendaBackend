@@ -16,7 +16,6 @@ namespace Model.Common
         [Required(ErrorMessage = "Debe seleccionar un correo electrónico")]
         [MaxLength(100, ErrorMessage = "El nombre de usuario no puede exceder los 50 carácteres")]
         public string CorreoElectronico { get; set; }
-        [Required(ErrorMessage = "Debe seleccionar una contraseña válida")]
         public string Password { get; set; }
         public byte[] PasswordHash { get; set; }
         public int idPerfil { get; set; }

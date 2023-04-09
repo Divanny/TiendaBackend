@@ -17,29 +17,29 @@ namespace Data.Common
         }
         public void LogHttpRequest(object data)
         {
-            LogActividad log = new LogActividad()
-            {
-                URL = HttpContext.Current.Request.RawUrl.ToString(),
-                idUsuario = OnlineUser.GetUserId(),
-                Metodo = HttpContext.Current.Request.HttpMethod.ToString(),
-                Fecha = DateTime.Now,
-                Data = data == null ? String.Empty : Newtonsoft.Json.JsonConvert.SerializeObject(data)
-            };
+            //LogActividad log = new LogActividad()
+            //{
+            //    URL = HttpContext.Current.Request.RawUrl.ToString(),
+            //    idUsuario = OnlineUser.GetUserId(),
+            //    Metodo = HttpContext.Current.Request.HttpMethod.ToString(),
+            //    Fecha = DateTime.Now,
+            //    Data = data == null ? String.Empty : Newtonsoft.Json.JsonConvert.SerializeObject(data)
+            //};
 
-            dbContext.Set<LogActividad>().Add(log);
-            dbContext.SaveChanges();
+            //dbContext.Set<LogActividad>().Add(log);
+            //dbContext.SaveChanges();
         }
         public void LogHttpRequest(int idUsuario, object data)
         {
-            LogActividad log = new LogActividad()
-            {
-                URL = HttpContext.Current.Request.RawUrl.ToString(),
-                idUsuario = idUsuario,
-                Metodo = HttpContext.Current.Request.HttpMethod.ToString(),
-                Fecha = DateTime.Now,
-                Data = data == null ? String.Empty : Newtonsoft.Json.JsonConvert.SerializeObject(data)
-            };
-            LogHttpRequest(log);
+            //LogActividad log = new LogActividad()
+            //{
+            //    URL = HttpContext.Current.Request.RawUrl.ToString(),
+            //    idUsuario = idUsuario,
+            //    Metodo = HttpContext.Current.Request.HttpMethod.ToString(),
+            //    Fecha = DateTime.Now,
+            //    Data = data == null ? String.Empty : Newtonsoft.Json.JsonConvert.SerializeObject(data)
+            //};
+            //LogHttpRequest(log);
         }
         public void LogHttpRequest(LogActividad log)
         {

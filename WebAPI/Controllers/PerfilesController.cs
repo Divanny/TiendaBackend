@@ -17,14 +17,14 @@ namespace WebAPI.Controllers
     {
         PerfilesRepo perfilesRepo = new PerfilesRepo();
 
-        [Autorizar(PerfilesEnum.Administrador)]
+        [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpGet]
         public List<PerfilesModel> Get()
         {
             return perfilesRepo.Get().ToList();
         }
 
-        [Autorizar(PerfilesEnum.Administrador)]
+        [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpPost]
         public OperationResult Post(PerfilesModel model)
         {
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
 
-        [Autorizar(PerfilesEnum.Administrador)]
+        [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpPut]
         public OperationResult Put(int idPerfil, PerfilesModel model)
         {
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
 
-        [Autorizar(PerfilesEnum.Administrador)]
+        [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpDelete]
         public OperationResult Delete(int idPerfil)
         {
@@ -73,6 +73,14 @@ namespace WebAPI.Controllers
             { 
                 return new OperationResult(false, "No se ha podido eliminar este perfil");
             }
+        }
+
+        [Autorizar(VistasEnum.GestionarPerfiles)]
+        [HttpGet]
+        [Route("GetVistas")]
+        public List<VistasModel> GetVistas()
+        {
+            return perfilesRepo.GetVistas().ToList();
         }
     }
 }

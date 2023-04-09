@@ -16,12 +16,12 @@ namespace WebAPI.Infraestructure
     /// </summary>
     public class AutorizarAttribute : System.Web.Http.AuthorizeAttribute
     {
-        public PerfilesEnum[] AppProfiles { get; set; }
+        public VistasEnum[] AppProfiles { get; set; }
         public bool AllowAnyProfile { get; set; }
         EstadoSesion sesionStatus;
-        public AutorizarAttribute(params PerfilesEnum[] perfiles)
+        public AutorizarAttribute(params VistasEnum[] vistas)
         {
-            AppProfiles = perfiles;
+            AppProfiles = vistas;
         }
         public override void OnAuthorization(HttpActionContext actionContext)
         {

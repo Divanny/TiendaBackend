@@ -212,5 +212,18 @@ namespace Data
         {
             return !dbContext.Set<Usuarios>().Any(a => a.idPerfil == id);
         }
+
+        public IEnumerable<VistasModel> GetVistas()
+        {
+            return from v in dbContext.Set<Vistas>()
+                   select new VistasModel()
+                   {
+                       idVista = v.idVista,
+                       Vista = v.Nombre,
+                       DescVista = v.Descripcion,
+                       URL = v.URL,
+                       Principal = v.Principal
+                   };
+        }
     }
 }

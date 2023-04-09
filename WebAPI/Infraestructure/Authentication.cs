@@ -36,6 +36,10 @@ namespace WebAPI.Infraestructure
                 if (usuario.idEstado == (int)EstadoUsuarioEnum.Inactivo) return new LogInResult(false, "<i class='fas fa-lock'></i> El usuario <strong>" + credentials.userName + "</strong> está inactivo");
 
                 var token = SessionData.Set(new UserSesionInfo() { idUsuario = usuario.idUsuario.ToString(), idPerfil = usuario.idPerfil.ToString() });
+
+                usuario.UltimoIngreso = DateTime.Now;
+                ur.Edit(usuario, usuario.idUsuario);
+
                 logInResult = new LogInResult(true, "Exito al iniciar sesión", true, usuario.idUsuario, token);
             }
             return logInResult;

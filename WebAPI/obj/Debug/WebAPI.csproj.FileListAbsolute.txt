@@ -217,3 +217,7 @@ D:\Software Projects\TiendaBackend\WebAPI\bin\System.Text.Encodings.Web.xml
 D:\Software Projects\TiendaBackend\WebAPI\bin\System.Text.Json.xml
 D:\Software Projects\TiendaBackend\WebAPI\bin\System.Threading.Tasks.Extensions.xml
 D:\Software Projects\TiendaBackend\WebAPI\bin\System.ValueTuple.xml
+D:\Software Projects\TiendaBackend\WebAPI\bin\BouncyCastle.Crypto.dll
+D:\Software Projects\TiendaBackend\WebAPI\bin\itextsharp.dll
+D:\Software Projects\TiendaBackend\WebAPI\bin\itextsharp.xml
+D:\Software Projects\TiendaBackend\WebAPI\bin\itextsharp.xmlworker.dll
