@@ -11,6 +11,15 @@
         <EntityTypeShape EntityType="TiendaDBModel.PerfilesVistas" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TiendaDBModel.Usuarios" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TiendaDBModel.Vistas" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TiendaDBModel.Carritos" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.CarritosProductos" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.Categorias" Width="1.5" PointX="2.75" PointY="7.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.DireccionesUsuarios" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.EstadosPedidos" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.MetodosPagoUsuarios" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.Pedidos" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.Productos" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.ProductosCategorias" Width="1.5" PointX="9.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

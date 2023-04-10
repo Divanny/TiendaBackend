@@ -31,5 +31,14 @@ namespace Data
         public virtual DbSet<PerfilesVistas> PerfilesVistas { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Vistas> Vistas { get; set; }
+        public virtual DbSet<Carritos> Carritos { get; set; }
+        public virtual DbSet<CarritosProductos> CarritosProductos { get; set; }
+        public virtual DbSet<Categorias> Categorias { get; set; }
+        public virtual DbSet<DireccionesUsuarios> DireccionesUsuarios { get; set; }
+        public virtual DbSet<EstadosPedidos> EstadosPedidos { get; set; }
+        public virtual DbSet<MetodosPagoUsuarios> MetodosPagoUsuarios { get; set; }
+        public virtual DbSet<Pedidos> Pedidos { get; set; }
+        public virtual DbSet<Productos> Productos { get; set; }
+        public virtual DbSet<ProductosCategorias> ProductosCategorias { get; set; }
     }
 }

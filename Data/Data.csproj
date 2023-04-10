@@ -67,21 +67,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administration\PerfilesRepo.cs" />
+    <Compile Include="Carritos.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarritosProductos.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Categorias.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Common\Logger.cs" />
     <Compile Include="Common\ObjectsMapper.cs" />
     <Compile Include="Common\OnlineUser.cs" />
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Administration\UsuariosRepo.cs" />
+    <Compile Include="Common\Utilities.cs" />
+    <Compile Include="DireccionesUsuarios.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadosPedidos.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EstadosUsuarios.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="LogActividad.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="MetodosPagoUsuarios.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pedidos.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Perfiles.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="PerfilesVistas.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Productos.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductosCategorias.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

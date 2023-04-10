@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Common;
 using Microsoft.Ajax.Utilities;
 using Model;
 using Model.Common;
@@ -91,6 +92,14 @@ namespace WebAPI.Controllers
                     return new OperationResult(false, "Se debe colocar una contraseña válida", Validation.Errors);
                 }
 
+                Utilities utilities = new Utilities();
+                var PasswordValidation = utilities.ValidarContraseña(model.Password);
+
+                if (!PasswordValidation.Success)
+                {
+                    return PasswordValidation;
+                }
+
                 UsuariosModel usuario = usuariosRepo.GetByUsername(model.NombreUsuario);
                 if (usuario != null)
                 {
@@ -165,8 +174,17 @@ namespace WebAPI.Controllers
                     }                
                 }
 
+
                 if (model.Password != null && model.Password != "")
                 {
+                    Utilities utilities = new Utilities();
+                    var PasswordValidation = utilities.ValidarContraseña(model.Password);
+
+                    if (!PasswordValidation.Success)
+                    {
+                        return PasswordValidation;
+                    }
+
                     model.PasswordHash = Cryptography.Encrypt(model.Password);
                 }
                 else
