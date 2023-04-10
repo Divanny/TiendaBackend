@@ -21,7 +21,7 @@ namespace Data
                 idProducto = p.idProducto,
                 Nombre = p.Nombre,
                 Descripcion = p.Descripcion,
-                Cantidad = p.Cantidad,
+                Cantidad = p.CantidadStock,
                 EstaActivo = p.EstaActivo
             }),
             (DB, filter) => (from p in DB.Set<Productos>().Where(filter)
@@ -39,7 +39,7 @@ namespace Data
                                  Nombre = g.Key.Nombre,
                                  Descripcion = g.Key.Descripcion,
                                  CantCategorias = DB.Set<ProductosCategorias>().Count(a => a.idProducto == g.Key.idProducto),
-                                 Cantidad = g.Key.Cantidad,
+                                 CantidadStock = g.Key.Cantidad,
                                  Valoracion = (g.Key.SumaValoraciones > 0) ? (g.Key.SumaValoraciones / g.Key.CantidadValoraciones) : (0),
                                  FechaIngreso = g.Key.FechaIngreso,
                                  EstaActivo = g.Key.EstaActivo,

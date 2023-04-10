@@ -42,7 +42,7 @@ namespace Data.Common
             }
 
             // Si todos los criterios son satisfechos, entonces la contraseña es segura
-            return new OperationResult(false, "La contraseña es segura");
+            return new OperationResult(true, "La contraseña es segura");
         }
     }
 }

@@ -87,6 +87,12 @@ namespace WebAPI.Controllers
         {
             if (ValidateModel(model))
             {
+                UsuariosModel usuario = usuariosRepo.GetByUsername(model.NombreUsuario);
+                if (usuario != null)
+                {
+                    return new OperationResult(false, "Este usuario ya está registrado");
+                }
+
                 if (model.Password == null || model.Password == "")
                 {
                     return new OperationResult(false, "Se debe colocar una contraseña válida", Validation.Errors);
@@ -98,12 +104,6 @@ namespace WebAPI.Controllers
                 if (!PasswordValidation.Success)
                 {
                     return PasswordValidation;
-                }
-
-                UsuariosModel usuario = usuariosRepo.GetByUsername(model.NombreUsuario);
-                if (usuario != null)
-                {
-                    return new OperationResult(false, "Este usuario ya está registrado");
                 }
 
                 model.PasswordHash = Cryptography.Encrypt(model.Password);

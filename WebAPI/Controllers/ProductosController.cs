@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
-using System.Web.Mvc;
+using System.Web.Http;
 using WebAPI.Infraestructure;
 using Model.Productos;
 
@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
         ProductosRepo productosRepo = new ProductosRepo();
 
         [HttpGet]
-        //[Autorizar(AllowAnyProfile = true)]
+        [Autorizar(AllowAnyProfile = true)]
         public List<ProductosModel> Get()
         {
             List<ProductosModel> productos = productosRepo.Get().ToList();
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        //[Autorizar(AllowAnyProfile = true)]
+        [Autorizar(AllowAnyProfile = true)]
         public ProductosModel Get(int idProducto)
         {
             ProductosModel producto = productosRepo.Get(x => x.idProducto == idProducto).FirstOrDefault();
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        //[Autorizar(AllowAnyProfile = true)]
+        [Autorizar(AllowAnyProfile = true)]
         public OperationResult Post(ProductosModel model)
         {
             if (ValidateModel(model))
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        //[Autorizar(AllowAnyProfile = true)]
+        [Autorizar(AllowAnyProfile = true)]
         public OperationResult Put(int idProducto, ProductosModel model)
         {
             if (ValidateModel(model))
@@ -61,12 +61,32 @@ namespace WebAPI.Controllers
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
 
+        [Route("GetCategorias")]
         [HttpGet]
-        //[Autorizar(AllowAnyProfile = true)]
+        [Autorizar(AllowAnyProfile = true)]
         public List<CategoriasModel> GetCategorias()
         {
             List<CategoriasModel> categorias = productosRepo.GetCategorias().ToList();
             return categorias;
+        }
+
+        [Route("Valorar")]
+        [HttpPut]
+        [Autorizar(AllowAnyProfile = true)]
+        public OperationResult Valorar(int idProducto, int valor)
+        {
+            if (valor <= 0 || valor > 5)
+            {
+                return new OperationResult(false, "El valor excede el límite");
+            }
+
+            var model = productosRepo.Get(x => x.idProducto == idProducto).FirstOrDefault();
+            model.SumaValoraciones += valor;
+            model.CantidadValoraciones++;
+
+            productosRepo.Edit(model, idProducto);
+
+            return new OperationResult(true, "El producto ha sido valorado satisfactoriamente");
         }
     }
 }

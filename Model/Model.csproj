@@ -54,6 +54,7 @@
     <Compile Include="Identity.cs" />
     <Compile Include="Principal.cs" />
     <Compile Include="Productos\CategoriasModel.cs" />
+    <Compile Include="Productos\CarritosModel.cs" />
     <Compile Include="Productos\ProductosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

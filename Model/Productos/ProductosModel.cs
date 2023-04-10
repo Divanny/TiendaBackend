@@ -22,7 +22,7 @@ namespace Model.Productos
         [Required]
         public decimal Precio { get; set; }
         [Required]
-        public int Cantidad { get; set; }
+        public int CantidadStock { get; set; }
         public System.DateTime FechaIngreso { get; set; }
         public bool EstaActivo { get; set; }
         public IEnumerable<CategoriasModel> Categorias { get; set; }
