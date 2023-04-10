@@ -10,5 +10,6 @@ namespace Model.Productos
         [Required]
         public string Descripcion { get; set; }
         public System.DateTime FechaIngreso { get; set; }
+        public bool PoseeCategoria { get; set; }
     }
 }

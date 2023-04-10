@@ -67,7 +67,6 @@ namespace WebAPI.Controllers
                 perfilesRepo.Delete(idPerfil);
                 perfilesRepo.Log(idPerfil);
                 return new OperationResult(true, "Se ha eliminado satisfactoriamente");
-
             }
             catch(Exception ex) 
             { 

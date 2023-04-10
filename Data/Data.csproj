@@ -112,6 +112,7 @@
     <Compile Include="ProductosCategorias.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Productos\ProductosRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiendaDB.Context.cs">
       <AutoGen>True</AutoGen>

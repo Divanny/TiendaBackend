@@ -18,6 +18,7 @@ namespace Model.Productos
         public string Descripcion { get; set; }
         public int SumaValoraciones { get; set; }
         public int CantidadValoraciones { get; set; }
+        public int Valoracion { get; set; }
         [Required]
         public decimal Precio { get; set; }
         [Required]
@@ -25,5 +26,6 @@ namespace Model.Productos
         public System.DateTime FechaIngreso { get; set; }
         public bool EstaActivo { get; set; }
         public IEnumerable<CategoriasModel> Categorias { get; set; }
+        public int CantCategorias { get; set; }
     }
 }
