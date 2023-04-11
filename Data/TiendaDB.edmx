@@ -19,9 +19,10 @@
             <PropertyRef Name="idCarritoProducto" />
           </Key>
           <Property Name="idCarritoProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idCarrito" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="idProducto" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Precio" Type="money" Nullable="false" />
+          <Property Name="idCarrito" Type="int" Nullable="false" />
+          <Property Name="idProducto" Type="int" Nullable="false" />
+          <Property Name="PrecioPorProducto" Type="money" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Categorias">
@@ -276,10 +277,11 @@
             <PropertyRef Name="idCarritoProducto" />
           </Key>
           <Property Name="idCarritoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idCarrito" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="idProducto" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="idCarrito" Type="Int32" Nullable="false" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
           <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PrecioPorProducto" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Categorias">
           <Key>
@@ -444,8 +446,9 @@
           <EntitySetMapping Name="CarritosProductos">
             <EntityTypeMapping TypeName="TiendaDBModel.CarritosProductos">
               <MappingFragment StoreEntitySet="CarritosProductos">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioPorProducto" ColumnName="PrecioPorProducto" />
                 <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="idProducto" ColumnName="idProducto" />
                 <ScalarProperty Name="idCarrito" ColumnName="idCarrito" />
                 <ScalarProperty Name="idCarritoProducto" ColumnName="idCarritoProducto" />

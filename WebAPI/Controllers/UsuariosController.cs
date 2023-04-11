@@ -61,7 +61,12 @@ namespace WebAPI.Controllers
                 }
 
                 model.PasswordHash  = Cryptography.Encrypt(model.Password);
-                model.idEstado = (int)EstadoUsuarioEnum.Activo;
+                
+                if (model.idEstado == 0)
+                {
+                    model.idEstado = (int)EstadoUsuarioEnum.Activo;
+                }
+
                 model.FechaRegistro = DateTime.Now;
                 model.UltimoIngreso = DateTime.Now;
 

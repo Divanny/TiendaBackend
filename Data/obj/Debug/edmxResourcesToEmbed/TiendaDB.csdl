@@ -93,10 +93,11 @@
       <PropertyRef Name="idCarritoProducto" />
     </Key>
     <Property Name="idCarritoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="idCarrito" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="idProducto" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="idCarrito" Type="Int32" Nullable="false" />
+    <Property Name="idProducto" Type="Int32" Nullable="false" />
     <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PrecioPorProducto" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Categorias">
     <Key>

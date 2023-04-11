@@ -14,9 +14,10 @@
       <PropertyRef Name="idCarritoProducto" />
     </Key>
     <Property Name="idCarritoProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idCarrito" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="idProducto" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="Precio" Type="money" Nullable="false" />
+    <Property Name="idCarrito" Type="int" Nullable="false" />
+    <Property Name="idProducto" Type="int" Nullable="false" />
+    <Property Name="PrecioPorProducto" Type="money" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Categorias">

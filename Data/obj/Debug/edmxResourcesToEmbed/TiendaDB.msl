@@ -82,8 +82,9 @@
     <EntitySetMapping Name="CarritosProductos">
       <EntityTypeMapping TypeName="TiendaDBModel.CarritosProductos">
         <MappingFragment StoreEntitySet="CarritosProductos">
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="PrecioPorProducto" ColumnName="PrecioPorProducto" />
           <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-          <ScalarProperty Name="Precio" ColumnName="Precio" />
           <ScalarProperty Name="idProducto" ColumnName="idProducto" />
           <ScalarProperty Name="idCarrito" ColumnName="idCarrito" />
           <ScalarProperty Name="idCarritoProducto" ColumnName="idCarritoProducto" />

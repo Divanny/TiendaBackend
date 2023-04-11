@@ -15,9 +15,10 @@ namespace Data
     public partial class CarritosProductos
     {
         public int idCarritoProducto { get; set; }
-        public string idCarrito { get; set; }
-        public string idProducto { get; set; }
-        public decimal Precio { get; set; }
+        public int idCarrito { get; set; }
+        public int idProducto { get; set; }
         public System.DateTime FechaIngreso { get; set; }
+        public decimal PrecioPorProducto { get; set; }
+        public int Cantidad { get; set; }
     }
 }
