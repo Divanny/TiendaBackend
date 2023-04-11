@@ -11,9 +11,16 @@ using WebAPI.Infraestructure;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// API para manejar la cuenta del usuario.
+    /// </summary>
     [RoutePrefix("api/Account")]
     public class AccountController : ApiBaseController
     {
+        /// <summary>
+        /// Obtiene la información del usuario en línea.
+        /// </summary>
+        /// <returns></returns>
         [Route("GetUserData")]
         [Autorizar(AllowAnyProfile = true)]
         public object Get()
@@ -48,6 +55,12 @@ namespace WebAPI.Controllers
                 vistas = vistas
             };
         }
+
+        /// <summary>
+        /// Iniciar sesión en el sistema.
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <returns></returns>
         [Route("LogIn")]
         [HttpPost]
         //public OperationResult Post(string userName, string password)
@@ -78,6 +91,12 @@ namespace WebAPI.Controllers
             else
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
+
+        /// <summary>
+        /// Obtiene "Mi perfil" del usuario.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         [Route("MyProfile")]
         [Autorizar(AllowAnyProfile = true)]
         [HttpGet]
@@ -90,6 +109,10 @@ namespace WebAPI.Controllers
             };
         }
 
+        /// <summary>
+        /// Cierra sesión en el sistema.
+        /// </summary>
+        /// <returns></returns>
         [Route("LogOff")]
         public bool Put()
         {

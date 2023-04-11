@@ -21,11 +21,18 @@ using WebAPI.Infraestructure;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// API para manejar los usuarios del sistema.
+    /// </summary>
     [RoutePrefix("api/Usuarios")]
     public class UsuariosController : ApiBaseController
     {
         UsuariosRepo usuariosRepo = new UsuariosRepo();
 
+        /// <summary>
+        /// Obtiene un listado de los usuarios registrados.
+        /// </summary>
+        /// <returns></returns>
         // GET api/Usuarios
         [HttpGet]
         [Autorizar(VistasEnum.GestionarUsuarios)]
@@ -34,6 +41,11 @@ namespace WebAPI.Controllers
             return usuariosRepo.Get().ToList();
         }
 
+        /// <summary>
+        /// Obtiene un usuario en específico.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET api/Usuarios/5
         [HttpGet]
         [Autorizar(AllowAnyProfile = true)]
@@ -42,6 +54,11 @@ namespace WebAPI.Controllers
             return usuariosRepo.Get(x => x.idUsuario == id).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Agrega un nuevo usuario (se necesita permiso de administrador).
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // POST api/Usuarios
         [HttpPost]
         [Autorizar(VistasEnum.GestionarUsuarios)]
@@ -85,6 +102,11 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Registro de nuevo usuario.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // POST api/Usuarios/Registrar
         [HttpPost]
         [Route("Registrar")]
@@ -155,6 +177,12 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Actualiza la información de un usuario.
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // PUT api/Usuarios/5
         [Autorizar(AllowAnyProfile = true)]
         [HttpPut]
@@ -208,6 +236,10 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene los diferentes estados que puede estar un usuario.
+        /// </summary>
+        /// <returns></returns>
         // GET api/Usuarios/GetEstadosUsuarios
         [Route("GetEstadosUsuarios")]
         [HttpGet]
@@ -217,10 +249,14 @@ namespace WebAPI.Controllers
             return usuariosRepo.GetEstadosUsuarios();
         }
 
+        /// <summary>
+        /// Obtiene un reporte pdf con el listado de usuarios registrados.
+        /// </summary>
+        /// <returns></returns>
         // GET api/Usuarios/GetReporteUsuarios
         [Route("GetReporteUsuarios")]
         [HttpGet]
-        //[Autorizar(VistasEnum.GestionarUsuarios)]
+        [Autorizar(VistasEnum.GestionarUsuarios)]
         public HttpResponseMessage GetReporteUsuarios()
         {
             var reportePdf = usuariosRepo.GenerarReporteUsuarios();

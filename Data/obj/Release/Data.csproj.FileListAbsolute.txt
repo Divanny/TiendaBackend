@@ -14,3 +14,23 @@ D:\Software Projects\TiendaBackend\Data\obj\Release\Data.csproj.CoreCompileInput
 D:\Software Projects\TiendaBackend\Data\obj\Release\Data.csproj.CopyComplete
 D:\Software Projects\TiendaBackend\Data\obj\Release\Data.dll
 D:\Software Projects\TiendaBackend\Data\obj\Release\Data.pdb
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\Data.dll.config
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\Data.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\Data.pdb
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\BouncyCastle.Crypto.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\EntityFramework.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\itextsharp.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\itextsharp.xmlworker.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\Model.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\Newtonsoft.Json.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\Model.pdb
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\EntityFramework.xml
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\itextsharp.xml
+C:\Users\divperez\source\repos\TiendaBackend\Data\bin\Release\Newtonsoft.Json.xml
+C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.csproj.AssemblyReference.cache
+C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.csproj.CoreCompileInputs.cache
+C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.csproj.CopyComplete
+C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.dll
+C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.pdb

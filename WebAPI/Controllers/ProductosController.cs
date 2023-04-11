@@ -12,11 +12,18 @@ using Model.Productos;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// API para manejar los productos del sistema.
+    /// </summary>
     [RoutePrefix("api/Productos")]
     public class ProductosController : ApiBaseController
     {
         ProductosRepo productosRepo = new ProductosRepo();
 
+        /// <summary>
+        /// Obtiene un listado de los productos.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Autorizar(AllowAnyProfile = true)]
         public List<ProductosModel> Get()
@@ -25,6 +32,11 @@ namespace WebAPI.Controllers
             return productos;
         }
 
+        /// <summary>
+        /// Obtiene un producto en específico.
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <returns></returns>
         [HttpGet]
         [Autorizar(AllowAnyProfile = true)]
         public ProductosModel Get(int idProducto)
@@ -33,6 +45,11 @@ namespace WebAPI.Controllers
             return producto;
         }
 
+        /// <summary>
+        /// Crea un nuevo producto.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Autorizar(AllowAnyProfile = true)]
         public OperationResult Post(ProductosModel model)
@@ -47,6 +64,12 @@ namespace WebAPI.Controllers
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
 
+        /// <summary>
+        /// Actualiza la información de un producto.
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Autorizar(AllowAnyProfile = true)]
         public OperationResult Put(int idProducto, ProductosModel model)
@@ -61,6 +84,10 @@ namespace WebAPI.Controllers
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
 
+        /// <summary>
+        /// Obtiene todas las categorías de productos.
+        /// </summary>
+        /// <returns></returns>
         [Route("GetCategorias")]
         [HttpGet]
         [Autorizar(AllowAnyProfile = true)]
@@ -70,6 +97,12 @@ namespace WebAPI.Controllers
             return categorias;
         }
 
+        /// <summary>
+        /// Le da un ranking a un producto en específico. (Del 1 al 5).
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <param name="valor"></param>
+        /// <returns></returns>
         [Route("Valorar")]
         [HttpPut]
         [Autorizar(AllowAnyProfile = true)]

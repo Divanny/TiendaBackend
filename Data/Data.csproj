@@ -77,6 +77,7 @@
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\Mailing.cs" />
     <Compile Include="Common\ObjectsMapper.cs" />
     <Compile Include="Common\OnlineUser.cs" />
     <Compile Include="Common\Repository.cs" />
@@ -113,6 +114,7 @@
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Productos\CarritosRepo.cs" />
+    <Compile Include="Productos\PedidosRepo.cs" />
     <Compile Include="Productos\ProductosRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiendaDB.Context.cs">
@@ -133,6 +135,8 @@
     <Compile Include="Usuarios.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Usuarios\MetodosPagoRepo.cs" />
+    <Compile Include="Usuarios\DireccionesRepo.cs" />
     <Compile Include="Vistas.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
@@ -158,6 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\MailLayout.html" />
     <Content Include="TiendaDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TiendaDB.edmx</DependentUpon>
@@ -169,6 +174,7 @@
       <LastGenOutput>TiendaDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

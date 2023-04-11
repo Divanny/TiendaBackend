@@ -53,10 +53,13 @@
     <Compile Include="Enum\PerfilesEnum.cs" />
     <Compile Include="Identity.cs" />
     <Compile Include="Principal.cs" />
+    <Compile Include="Productos\PedidosModel.cs" />
     <Compile Include="Productos\CategoriasModel.cs" />
     <Compile Include="Productos\CarritosModel.cs" />
     <Compile Include="Productos\ProductosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usuarios\MetodosPagoUsuariosModel.cs" />
+    <Compile Include="Usuarios\DireccionesModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

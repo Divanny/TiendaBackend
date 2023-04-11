@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,8 @@ namespace WebAPI.Controllers
     {
         public ActionResult Index()
         {
+            Mailing mailing = new Mailing();
+            mailing.SendEmail("divannyjpm@gmail.com", "probando", "<div><h2>Probando</h2></div>");
             ViewBag.Title = "Home Page";
 
             return View();

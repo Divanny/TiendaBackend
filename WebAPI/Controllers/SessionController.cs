@@ -17,9 +17,16 @@ using WebAPI.Infraestructure;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// API para manejar la sesión actual del sistema.
+    /// </summary>
     [RoutePrefix("api/Session")]
     public class SessionController : ApiController
     {
+        /// <summary>
+        /// Obtiene el estado de la sesión.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetSessionState")]
         public IHttpActionResult GetSessionState()
@@ -40,6 +47,10 @@ namespace WebAPI.Controllers
             return Ok(sessionData);
         }
 
+        /// <summary>
+        /// Obtiene la información del usuario en línea.
+        /// </summary>
+        /// <returns></returns>
         [Autorizar(AllowAnyProfile = true)]
         [HttpGet]
         [Route("GetOnlineUser")]

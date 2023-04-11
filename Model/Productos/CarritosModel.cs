@@ -14,6 +14,6 @@ namespace Model.Productos
         public int idUsuario { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public bool EstaTerminado { get; set; }
-        public List<ProductosModel> Productos { get; set; }
+        public IEnumerable<ProductosModel> Productos { get; set; }
     }
 }

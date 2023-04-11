@@ -26,26 +26,34 @@ namespace Data
                 EstaTerminado = p.EstaTerminado,
             }),
             (DB, filter) => (from c in DB.Set<Carritos>().Where(filter)
-                join cp in DB.Set<CarritosProductos>() on c.idCarrito equals cp.idCarrito
-                join p in DB.Set<Productos>() on cp.idProducto equals p.idProducto
-                where cp.idCarrito == c.idCarrito /* OJO -- ARREGLAR ESTO, SOLO TRAE 1 PRODUCTO, TAMBIEN HACER QUE DIGA LA CANTIDAD DE ESE PRODUCTO Y PRECIO POR PRODUCTO */
-                select new CarritosModel()
-                {
-                    idCarrito = c.idCarrito,
-                    idUsuario = c.idUsuario,
-                    FechaCreacion = c.FechaCreacion,
-                    EstaTerminado = c.EstaTerminado,
-                    Productos = DB.Set<Productos>().Where(x => cp.idProducto == x.idProducto).Select(x => new ProductosModel()
-                    {
-                        idProducto = x.idProducto,
-                        Nombre = x.Nombre,
-                        Descripcion = x.Descripcion,
-                        CantidadStock = x.Cantidad,
-                        Valoracion = (x.SumaValoraciones > 0) ? (x.SumaValoraciones / x.CantidadValoraciones) : (0),
-                        FechaIngreso = x.FechaIngreso,
-                        EstaActivo = x.EstaActivo,
-                    }).ToList(),
-                })
+                 join cp in DB.Set<CarritosProductos>() on c.idCarrito equals cp.idCarrito
+                 join p in DB.Set<Productos>() on cp.idProducto equals p.idProducto
+                 select new
+                 {
+                     Carrito = c,
+                     Producto = p,
+                     CarritosProductos = cp
+                 })
+                             .GroupBy(x => x.Carrito)
+                             .Select(g => new CarritosModel()
+                             {
+                                 idCarrito = g.Key.idCarrito,
+                                 idUsuario = g.Key.idUsuario,
+                                 FechaCreacion = g.Key.FechaCreacion,
+                                 EstaTerminado = g.Key.EstaTerminado,
+                                 Productos = g.Select(x => new ProductosModel()
+                                 {
+                                     idProducto = x.Producto.idProducto,
+                                     Nombre = x.Producto.Nombre,
+                                     Descripcion = x.Producto.Descripcion,
+                                     CantidadStock = x.Producto.Cantidad,
+                                     Valoracion = (x.Producto.SumaValoraciones > 0) ? (x.Producto.SumaValoraciones / x.Producto.CantidadValoraciones) : (0),
+                                     FechaIngreso = x.Producto.FechaIngreso,
+                                     Precio = x.CarritosProductos.PrecioPorProducto, // Precio que tiene CarritosProductos.PrecioPorProducto
+                                     CantidadEnCarrito = x.CarritosProductos.Cantidad, // Cantidad que tiene CarritosProductos.Cantidad
+                                     EstaActivo = x.Producto.EstaActivo,
+                                 })
+                             })
         )
         {
 
@@ -93,6 +101,34 @@ namespace Data
             }
 
             return new OperationResult(true, "Se ha agregado satisfactoriamente");
+        }
+        public OperationResult RemoverProductos(int idCarrito, int idProducto, int cantidad)
+        {
+            var carritosProductos = dbContext.Set<CarritosProductos>().Where(x => x.idCarrito == idCarrito).ToList();
+
+            if (carritosProductos.Any(x => x.idProducto == idProducto))
+            {
+                CarritosProductos model = dbContext.Set<CarritosProductos>().Where(x => x.idCarrito == idCarrito && x.idProducto == idProducto).FirstOrDefault();
+                ProductosModel producto = productosRepo.Get(idProducto);
+
+                if ((model.Cantidad - cantidad) >= 0)
+                {
+                    model.Cantidad -= cantidad;
+                }
+                else
+                {
+                    return new OperationResult(false, $"No existe esta cantidad de {producto.Nombre} en el carrito.");
+                }
+
+                dbContext.Entry(model).State = EntityState.Modified;
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                return new OperationResult(false, "Este producto no existe en el carrito");
+            }
+
+            return new OperationResult(true, "Se ha removido satisfactoriamente");
         }
     }
 }

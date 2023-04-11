@@ -1,5 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TiendaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Carritos">
+    <Key>
+      <PropertyRef Name="idCarrito" />
+    </Key>
+    <Property Name="idCarrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="EstaTerminado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarritosProductos">
+    <Key>
+      <PropertyRef Name="idCarritoProducto" />
+    </Key>
+    <Property Name="idCarritoProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCarrito" Type="int" Nullable="false" />
+    <Property Name="idProducto" Type="int" Nullable="false" />
+    <Property Name="PrecioPorProducto" Type="money" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="idCategoria" />
+    </Key>
+    <Property Name="idCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="250" />
+    <Property Name="FechaIngreso" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DireccionesUsuarios">
+    <Key>
+      <PropertyRef Name="idDireccion" />
+    </Key>
+    <Property Name="idDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="Direccion" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CodigoPostal" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Pais" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EsPrincipal" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadosPedidos">
+    <Key>
+      <PropertyRef Name="idEstado" />
+    </Key>
+    <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+  </EntityType>
   <EntityType Name="EstadosUsuarios">
     <Key>
       <PropertyRef Name="idEstado" />
@@ -19,6 +68,31 @@
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="Data" Type="varchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="MetodosPagoUsuarios">
+    <Key>
+      <PropertyRef Name="idMetodo" />
+    </Key>
+    <Property Name="idMetodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Numero" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaExpiracion" Type="date" />
+    <Property Name="CVV" Type="varchar" MaxLength="10" />
+    <Property Name="EsPrincipal" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="idPedido" />
+    </Key>
+    <Property Name="idPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="idCarrito" Type="int" Nullable="false" />
+    <Property Name="idEstado" Type="int" Nullable="false" />
+    <Property Name="idMetodo" Type="int" Nullable="false" />
+    <Property Name="MontoPagado" Type="money" Nullable="false" />
+    <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+    <Property Name="FechaUltimoEstado" Type="datetime" />
+  </EntityType>
   <EntityType Name="Perfiles">
     <Key>
       <PropertyRef Name="idPerfil" />
@@ -35,6 +109,28 @@
     <Property Name="idPerfilVista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idPerfil" Type="int" Nullable="false" />
     <Property Name="idVista" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="idProducto" />
+    </Key>
+    <Property Name="idProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+    <Property Name="SumaValoraciones" Type="int" Nullable="false" />
+    <Property Name="CantidadValoraciones" Type="int" Nullable="false" />
+    <Property Name="Precio" Type="money" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+    <Property Name="EstaActivo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductosCategorias">
+    <Key>
+      <PropertyRef Name="idProductoCategoria" />
+    </Key>
+    <Property Name="idProductoCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idProducto" Type="int" Nullable="false" />
+    <Property Name="idCategoria" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
@@ -63,10 +159,19 @@
     <Property Name="Principal" Type="bit" Nullable="false" />
   </EntityType>
   <EntityContainer Name="TiendaDBModelStoreContainer">
+    <EntitySet Name="Carritos" EntityType="Self.Carritos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarritosProductos" EntityType="Self.CarritosProductos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DireccionesUsuarios" EntityType="Self.DireccionesUsuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadosPedidos" EntityType="Self.EstadosPedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadosUsuarios" EntityType="Self.EstadosUsuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LogActividad" EntityType="Self.LogActividad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MetodosPagoUsuarios" EntityType="Self.MetodosPagoUsuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PerfilesVistas" EntityType="Self.PerfilesVistas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductosCategorias" EntityType="Self.ProductosCategorias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vistas" EntityType="Self.Vistas" Schema="dbo" store:Type="Tables" />
   </EntityContainer>

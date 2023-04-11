@@ -69,5 +69,110 @@
     <EntitySet Name="PerfilesVistas" EntityType="Self.PerfilesVistas" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
     <EntitySet Name="Vistas" EntityType="Self.Vistas" />
+    <EntitySet Name="Carritos" EntityType="TiendaDBModel.Carritos" />
+    <EntitySet Name="CarritosProductos" EntityType="TiendaDBModel.CarritosProductos" />
+    <EntitySet Name="Categorias" EntityType="TiendaDBModel.Categorias" />
+    <EntitySet Name="DireccionesUsuarios" EntityType="TiendaDBModel.DireccionesUsuarios" />
+    <EntitySet Name="EstadosPedidos" EntityType="TiendaDBModel.EstadosPedidos" />
+    <EntitySet Name="MetodosPagoUsuarios" EntityType="TiendaDBModel.MetodosPagoUsuarios" />
+    <EntitySet Name="Pedidos" EntityType="TiendaDBModel.Pedidos" />
+    <EntitySet Name="Productos" EntityType="TiendaDBModel.Productos" />
+    <EntitySet Name="ProductosCategorias" EntityType="TiendaDBModel.ProductosCategorias" />
   </EntityContainer>
+  <EntityType Name="Carritos">
+    <Key>
+      <PropertyRef Name="idCarrito" />
+    </Key>
+    <Property Name="idCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EstaTerminado" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarritosProductos">
+    <Key>
+      <PropertyRef Name="idCarritoProducto" />
+    </Key>
+    <Property Name="idCarritoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCarrito" Type="Int32" Nullable="false" />
+    <Property Name="idProducto" Type="Int32" Nullable="false" />
+    <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PrecioPorProducto" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="idCategoria" />
+    </Key>
+    <Property Name="idCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="DireccionesUsuarios">
+    <Key>
+      <PropertyRef Name="idDireccion" />
+    </Key>
+    <Property Name="idDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="Direccion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Ciudad" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoPostal" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Pais" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EsPrincipal" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadosPedidos">
+    <Key>
+      <PropertyRef Name="idEstado" />
+    </Key>
+    <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MetodosPagoUsuarios">
+    <Key>
+      <PropertyRef Name="idMetodo" />
+    </Key>
+    <Property Name="idMetodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaExpiracion" Type="DateTime" Precision="0" />
+    <Property Name="CVV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EsPrincipal" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="idPedido" />
+    </Key>
+    <Property Name="idPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="idCarrito" Type="Int32" Nullable="false" />
+    <Property Name="idEstado" Type="Int32" Nullable="false" />
+    <Property Name="idMetodo" Type="Int32" Nullable="false" />
+    <Property Name="MontoPagado" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaUltimoEstado" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="idProducto" />
+    </Key>
+    <Property Name="idProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SumaValoraciones" Type="Int32" Nullable="false" />
+    <Property Name="CantidadValoraciones" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EstaActivo" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductosCategorias">
+    <Key>
+      <PropertyRef Name="idProductoCategoria" />
+    </Key>
+    <Property Name="idProductoCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idProducto" Type="Int32" Nullable="false" />
+    <Property Name="idCategoria" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

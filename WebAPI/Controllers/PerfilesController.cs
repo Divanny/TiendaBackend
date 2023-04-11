@@ -6,17 +6,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
-using System.Web.Mvc;
+using System.Web.Http;
 using WebAPI.Infraestructure;
 using Model.Enum;
 
 namespace WebAPI.Controllers
 {
+    /// <summary>
+    /// API para manejar los perfiles o roles del sistema.
+    /// </summary>
     [RoutePrefix("api/Perfiles")]
     public class PerfilesController : ApiBaseController
     {
         PerfilesRepo perfilesRepo = new PerfilesRepo();
 
+        /// <summary>
+        /// Obtiene un listado de todos los perfiles del sistema.
+        /// </summary>
+        /// <returns></returns>
         [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpGet]
         public List<PerfilesModel> Get()
@@ -24,6 +31,11 @@ namespace WebAPI.Controllers
             return perfilesRepo.Get().ToList();
         }
 
+        /// <summary>
+        /// Crea un nuevo perfil al sistema.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpPost]
         public OperationResult Post(PerfilesModel model)
@@ -32,7 +44,8 @@ namespace WebAPI.Controllers
             {
                 var ifExist = perfilesRepo.Get(x => x.Nombre == model.Nombre);
 
-                if (ifExist != null) {
+                if (ifExist != null)
+                {
                     return new OperationResult(false, "Este perfil ya existe", Validation.Errors);
                 }
 
@@ -44,6 +57,12 @@ namespace WebAPI.Controllers
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
 
+        /// <summary>
+        /// Actualiza la información de un perfil.
+        /// </summary>
+        /// <param name="idPerfil"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpPut]
         public OperationResult Put(int idPerfil, PerfilesModel model)
@@ -58,6 +77,11 @@ namespace WebAPI.Controllers
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
         }
 
+        /// <summary>
+        /// Elimina un perfil.
+        /// </summary>
+        /// <param name="idPerfil"></param>
+        /// <returns></returns>
         [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpDelete]
         public OperationResult Delete(int idPerfil)
@@ -68,12 +92,16 @@ namespace WebAPI.Controllers
                 perfilesRepo.Log(idPerfil);
                 return new OperationResult(true, "Se ha eliminado satisfactoriamente");
             }
-            catch(Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 return new OperationResult(false, "No se ha podido eliminar este perfil");
             }
         }
 
+        /// <summary>
+        /// Obtiene un listado de todas las vistas del sistema.
+        /// </summary>
+        /// <returns></returns>
         [Autorizar(VistasEnum.GestionarPerfiles)]
         [HttpGet]
         [Route("GetVistas")]

@@ -350,3 +350,4 @@ C:\Users\divperez\source\repos\TiendaBackend\WebAPI\obj\Debug\WebAPI.csproj.Core
 C:\Users\divperez\source\repos\TiendaBackend\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
 C:\Users\divperez\source\repos\TiendaBackend\WebAPI\obj\Debug\WebAPI.dll
 C:\Users\divperez\source\repos\TiendaBackend\WebAPI\obj\Debug\WebAPI.pdb
+C:\Users\divperez\source\repos\TiendaBackend\WebAPI\bin\XmlDocument.xml
