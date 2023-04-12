@@ -22,5 +22,6 @@ namespace Data
         public decimal MontoPagado { get; set; }
         public System.DateTime FechaIngreso { get; set; }
         public Nullable<System.DateTime> FechaUltimoEstado { get; set; }
+        public Nullable<int> idDireccion { get; set; }
     }
 }

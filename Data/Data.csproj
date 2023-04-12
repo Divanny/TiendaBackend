@@ -162,6 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\FacturaLayout.html" />
     <Content Include="Templates\MailLayout.html" />
     <Content Include="TiendaDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

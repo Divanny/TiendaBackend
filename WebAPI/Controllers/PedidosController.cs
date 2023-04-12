@@ -14,6 +14,9 @@ using static iTextSharp.text.pdf.AcroFields;
 using System.Data.Entity;
 using System.Net.Http;
 using Microsoft.IdentityModel.Tokens;
+using Data.Common;
+using System.Net.Http.Headers;
+using System.Net;
 
 namespace WebAPI.Controllers
 {
@@ -78,20 +81,49 @@ namespace WebAPI.Controllers
         }
 
         /// <summary>
+        /// Genera la factura como PDF de un pedido en específico (AUN NO ESTA FUNCIONANDO).
+        /// </summary>
+        /// <param name="idPedido"></param>
+        /// <returns></returns>
+        [Autorizar(AllowAnyProfile = true)]
+        [HttpGet]
+        [Route("GetFactura")]
+        public HttpResponseMessage GetFactura(int idPedido)
+        {
+            var pedido = pedidosRepo.Get(x => x.idPedido == idPedido).FirstOrDefault();
+            var facturaPdf = pedidosRepo.GenerarFactura(idPedido);
+
+            // Devolver el reporte PDF como un archivo descargable
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(facturaPdf)
+            };
+            result.Content.Headers.ContentDisposition =
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = $"Factura de pedido #{pedido.idPedido}.pdf"
+                };
+            result.Content.Headers.ContentType =
+                new MediaTypeHeaderValue("application/pdf");
+
+            return result;
+        }
+
+        /// <summary>
         /// Paga el carrito actual del usuario.
         /// </summary>
         /// <returns></returns>
         [Autorizar(AllowAnyProfile = true)]
         [HttpPost]
         [Route("Pagar")]
-        public OperationResult Pagar(int idUsuario, int idMetodoPago)
+        public OperationResult Pagar(int idUsuario, int idMetodoPago, int idDireccion)
         {
             if (idUsuario == 0)
             {
-                idUsuario = OnlineUser.GetUserId();
+                idUsuario = Infraestructure.OnlineUser.GetUserId();
             }
 
-            CarritosModel carrito = carritosRepo.Get(x => x.idUsuario == OnlineUser.GetUserId() && x.EstaTerminado == false).FirstOrDefault();
+            CarritosModel carrito = carritosRepo.Get(x => x.idUsuario == Infraestructure.OnlineUser.GetUserId() && x.EstaTerminado == false).FirstOrDefault();
 
             decimal montoTotal = 0;
             if (carrito != null)
@@ -112,6 +144,7 @@ namespace WebAPI.Controllers
                 MontoPagado = montoTotal,
                 FechaIngreso = DateTime.Now,
                 FechaUltimoEstado = DateTime.Now,
+                idDireccion = idDireccion,
             };
 
             // LOGICA DE INTENTO DE PAGO
@@ -138,6 +171,10 @@ namespace WebAPI.Controllers
                         var carritoCreated = carritosRepo.Add(carritoNew);
 
                         var created = pedidosRepo.Add(pedido);
+
+                        Mailing mailing = new Mailing();
+                        mailing.SendFacturaMail(created);
+
                         return new OperationResult(true, "Se ha procesado el pago, gracias por su compra.", created);
                     }
                     catch

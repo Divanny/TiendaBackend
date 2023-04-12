@@ -80,9 +80,9 @@
           <Property Name="idMetodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUsuario" Type="int" Nullable="false" />
           <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Numero" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numero" Type="varchar(max)" Nullable="false" />
           <Property Name="FechaExpiracion" Type="date" />
-          <Property Name="CVV" Type="varchar" MaxLength="10" />
+          <Property Name="CVV" Type="varchar(max)" />
           <Property Name="EsPrincipal" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Pedidos">
@@ -94,6 +94,7 @@
           <Property Name="idCarrito" Type="int" Nullable="false" />
           <Property Name="idEstado" Type="int" Nullable="false" />
           <Property Name="idMetodo" Type="int" Nullable="false" />
+          <Property Name="idDireccion" Type="int" />
           <Property Name="MontoPagado" Type="money" Nullable="false" />
           <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
           <Property Name="FechaUltimoEstado" Type="datetime" />
@@ -319,9 +320,9 @@
           <Property Name="idMetodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Numero" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FechaExpiracion" Type="DateTime" Precision="0" />
-          <Property Name="CVV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CVV" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="EsPrincipal" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Pedidos">
@@ -336,6 +337,7 @@
           <Property Name="MontoPagado" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaUltimoEstado" Type="DateTime" Precision="3" />
+          <Property Name="idDireccion" Type="Int32" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
@@ -503,6 +505,7 @@
           <EntitySetMapping Name="Pedidos">
             <EntityTypeMapping TypeName="TiendaDBModel.Pedidos">
               <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
                 <ScalarProperty Name="FechaUltimoEstado" ColumnName="FechaUltimoEstado" />
                 <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
                 <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />

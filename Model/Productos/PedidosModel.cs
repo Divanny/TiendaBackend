@@ -17,6 +17,7 @@ namespace Model.Productos
         public string Estado { get; set; }
         public int idMetodo { get; set; }
         public string Metodo { get; set; }
+        public int? idDireccion { get; set; }
         public decimal MontoPagado { get; set; }
         public System.DateTime FechaIngreso { get; set; }
         public Nullable<System.DateTime> FechaUltimoEstado { get; set; }

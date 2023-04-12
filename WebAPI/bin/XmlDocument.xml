@@ -592,7 +592,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebAPI.Controllers.PedidosController.Pagar(System.Int32,System.Int32)">
+        <member name="M:WebAPI.Controllers.PedidosController.GetFactura(System.Int32)">
+            <summary>
+            Genera la factura como PDF de un pedido en específico (AUN NO ESTA FUNCIONANDO).
+            </summary>
+            <param name="idPedido"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PedidosController.Pagar(System.Int32,System.Int32,System.Int32)">
             <summary>
             Paga el carrito actual del usuario.
             </summary>

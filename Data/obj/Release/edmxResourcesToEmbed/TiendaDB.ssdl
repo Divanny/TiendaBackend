@@ -75,9 +75,9 @@
     <Property Name="idMetodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idUsuario" Type="int" Nullable="false" />
     <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Numero" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Numero" Type="varchar(max)" Nullable="false" />
     <Property Name="FechaExpiracion" Type="date" />
-    <Property Name="CVV" Type="varchar" MaxLength="10" />
+    <Property Name="CVV" Type="varchar(max)" />
     <Property Name="EsPrincipal" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Pedidos">
@@ -89,6 +89,7 @@
     <Property Name="idCarrito" Type="int" Nullable="false" />
     <Property Name="idEstado" Type="int" Nullable="false" />
     <Property Name="idMetodo" Type="int" Nullable="false" />
+    <Property Name="idDireccion" Type="int" />
     <Property Name="MontoPagado" Type="money" Nullable="false" />
     <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
     <Property Name="FechaUltimoEstado" Type="datetime" />
