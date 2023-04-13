@@ -9,6 +9,7 @@ using System.Web.Helpers;
 using System.Web.Http;
 using WebAPI.Infraestructure;
 using Model.Productos;
+using Model.Enum;
 
 namespace WebAPI.Controllers
 {
@@ -38,7 +39,7 @@ namespace WebAPI.Controllers
         /// <param name="idProducto"></param>
         /// <returns></returns>
         [HttpGet]
-        [Autorizar(AllowAnyProfile = true)]
+        [Autorizar(VistasEnum.GestionarProductos)]
         public ProductosModel Get(int idProducto)
         {
             ProductosModel producto = productosRepo.Get(x => x.idProducto == idProducto).FirstOrDefault();
@@ -71,7 +72,7 @@ namespace WebAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut]
-        [Autorizar(AllowAnyProfile = true)]
+        [Autorizar(VistasEnum.GestionarProductos)]
         public OperationResult Put(int idProducto, ProductosModel model)
         {
             if (ValidateModel(model))
@@ -90,7 +91,7 @@ namespace WebAPI.Controllers
         /// <returns></returns>
         [Route("GetCategorias")]
         [HttpGet]
-        [Autorizar(AllowAnyProfile = true)]
+        [Autorizar(VistasEnum.GestionarProductos)]
         public List<CategoriasModel> GetCategorias()
         {
             List<CategoriasModel> categorias = productosRepo.GetCategorias().ToList();

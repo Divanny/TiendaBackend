@@ -619,6 +619,46 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:WebAPI.Controllers.CategoriasController">
+            <summary>
+            API para manejar las categorias o roles del sistema.
+            </summary>
+        </member>
+        <member name="M:WebAPI.Controllers.CategoriasController.Get">
+            <summary>
+            Obtiene un listado de todos las categorias del sistema.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.CategoriasController.Get(System.Int32)">
+            <summary>
+            Obtiene una categoria en específico.
+            </summary>
+            <param name="idCategoria"></param>
+            <returns></returns>onarPerfiles)]
+        </member>
+        <member name="M:WebAPI.Controllers.CategoriasController.Post(Model.Productos.CategoriasModel)">
+            <summary>
+            Crea un nuevo categoria al sistema.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.CategoriasController.Put(System.Int32,Model.Productos.CategoriasModel)">
+            <summary>
+            Actualiza la información de una categoría.
+            </summary>
+            <param name="idCategoria"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.CategoriasController.Delete(System.Int32)">
+            <summary>
+            Elimina una categoría.
+            </summary>
+            <param name="idCategoria"></param>
+            <returns></returns>
+        </member>
         <member name="T:WebAPI.Controllers.ProductosController">
             <summary>
             API para manejar los productos del sistema.

@@ -1,10 +1,12 @@
-﻿using Model.Productos;
+﻿using Model.Common;
+using Model.Productos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Model.Productos
 {
@@ -28,5 +30,7 @@ namespace Model.Productos
         public bool EstaActivo { get; set; }
         public IEnumerable<CategoriasModel> Categorias { get; set; }
         public int CantCategorias { get; set; }
+        [FileSize(1048576, ErrorMessage = "El archivo no puede ser mayor de 1 MB.")]
+        public HttpPostedFileBase Imagen { get; set; }
     }
 }

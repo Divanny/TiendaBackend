@@ -243,7 +243,7 @@ namespace WebAPI.Controllers
         // GET api/Usuarios/GetEstadosUsuarios
         [Route("GetEstadosUsuarios")]
         [HttpGet]
-        [Autorizar(VistasEnum.GestionarUsuarios)]
+        [Autorizar(AllowAnyProfile = true)]
         public object GetEstadosUsuarios()
         {
             return usuariosRepo.GetEstadosUsuarios();

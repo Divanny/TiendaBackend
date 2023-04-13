@@ -221,6 +221,7 @@
     <Compile Include="Controllers\CarritosController.cs" />
     <Compile Include="Controllers\MetodosPagosUsuarioController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\PerfilesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
