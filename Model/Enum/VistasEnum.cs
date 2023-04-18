@@ -9,7 +9,8 @@ namespace Model.Enum
     public enum VistasEnum
     {
         GestionarUsuarios = 1,
-        GestionarPerfiles = 2
+        GestionarPerfiles = 2,
+        GestionarProductos = 3,
     }
 
 }

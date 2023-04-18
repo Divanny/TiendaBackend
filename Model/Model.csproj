@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administration\PerfilesModel.cs" />
+    <Compile Include="Common\FileSize.cs" />
     <Compile Include="Common\LogInResult.cs" />
     <Compile Include="Common\OperationResult.cs" />
     <Compile Include="Administration\UsuariosModel.cs" />

@@ -139,6 +139,7 @@
     <EntitySetMapping Name="Pedidos">
       <EntityTypeMapping TypeName="TiendaDBModel.Pedidos">
         <MappingFragment StoreEntitySet="Pedidos">
+          <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
           <ScalarProperty Name="FechaUltimoEstado" ColumnName="FechaUltimoEstado" />
           <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
           <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />

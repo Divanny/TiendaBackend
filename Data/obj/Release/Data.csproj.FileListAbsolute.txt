@@ -34,3 +34,7 @@ C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.csproj.CoreCo
 C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.csproj.CopyComplete
 C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.dll
 C:\Users\divperez\source\repos\TiendaBackend\Data\obj\Release\Data.pdb
+D:\Software Projects\TiendaBackend\Data\bin\Release\BouncyCastle.Crypto.dll
+D:\Software Projects\TiendaBackend\Data\bin\Release\itextsharp.dll
+D:\Software Projects\TiendaBackend\Data\bin\Release\itextsharp.xmlworker.dll
+D:\Software Projects\TiendaBackend\Data\bin\Release\itextsharp.xml

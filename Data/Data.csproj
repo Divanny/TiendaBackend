@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Productos\CarritosRepo.cs" />
     <Compile Include="Productos\PedidosRepo.cs" />
+    <Compile Include="Productos\CategoriasRepo.cs" />
     <Compile Include="Productos\ProductosRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiendaDB.Context.cs">
@@ -162,6 +163,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\FacturaLayout.html" />
+    <Content Include="Templates\FacturaPDFLayout.html" />
     <Content Include="Templates\MailLayout.html" />
     <Content Include="TiendaDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

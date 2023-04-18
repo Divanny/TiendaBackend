@@ -252,3 +252,7 @@ C:\Users\divperez\source\repos\TiendaBackend\WebAPI\obj\Release\WebAPI.csproj.Co
 C:\Users\divperez\source\repos\TiendaBackend\WebAPI\obj\Release\WebAPI.csproj.CopyComplete
 C:\Users\divperez\source\repos\TiendaBackend\WebAPI\obj\Release\WebAPI.dll
 C:\Users\divperez\source\repos\TiendaBackend\WebAPI\obj\Release\WebAPI.pdb
+D:\Software Projects\TiendaBackend\WebAPI\bin\BouncyCastle.Crypto.dll
+D:\Software Projects\TiendaBackend\WebAPI\bin\itextsharp.dll
+D:\Software Projects\TiendaBackend\WebAPI\bin\itextsharp.xmlworker.dll
+D:\Software Projects\TiendaBackend\WebAPI\bin\itextsharp.xml

@@ -21,6 +21,7 @@ namespace Data
 {
     public class PedidosRepo : Repository<Pedidos, PedidosModel>
     {
+        Mailing mailing = new Mailing();
         public PedidosRepo(DbContext dbContext = null) : base
         (
             dbContext ?? new TiendaDBEntities(),
@@ -31,6 +32,7 @@ namespace Data
                 idCarrito = p.idCarrito,
                 idEstado = p.idEstado,
                 idMetodo = p.idMetodo,
+                idDireccion = p.idDireccion,
                 MontoPagado = p.MontoPagado,
                 FechaIngreso = p.FechaIngreso,
                 FechaUltimoEstado = p.FechaUltimoEstado
@@ -47,11 +49,33 @@ namespace Data
                                  Estado = e.Nombre,
                                  idMetodo = p.idMetodo,
                                  Metodo = m.Tipo,
+                                 idDireccion = p.idDireccion,
                                  MontoPagado = p.MontoPagado,
                                  FechaIngreso = p.FechaIngreso,
                                  FechaUltimoEstado = p.FechaUltimoEstado,
                              })
         )
         { }
+
+        public byte[] GenerarFactura(int idPedido)
+        {
+            PedidosModel pedido = this.Get(x => x.idPedido == idPedido).First();
+
+            string html = mailing.genFactura(pedido);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Document documento = new Document();
+                PdfWriter writer = PdfWriter.GetInstance(documento, ms);
+                writer.CloseStream = false;
+                documento.Open();
+
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, documento, new StringReader(html));
+
+                documento.Close();
+
+                return ms.ToArray();
+            }
+        }
     }
 }

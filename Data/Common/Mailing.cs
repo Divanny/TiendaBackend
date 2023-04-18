@@ -15,10 +15,57 @@ namespace Data.Common
 {
     public class Mailing
     {
-        public string genFactura(PedidosModel pedido, DireccionesModel direccion, UsuariosModel usuariosModel)
+        public string genFactura(Pedidos pedido)
         {
+            UsuariosRepo usuariosRepo = new UsuariosRepo();
+            DireccionesRepo direccionesRepo = new DireccionesRepo();
+
+            UsuariosModel usuario = usuariosRepo.Get(x => x.idUsuario == pedido.idUsuario).FirstOrDefault();
+            DireccionesModel direccion = direccionesRepo.Get(x => x.idDireccion == pedido.idDireccion).FirstOrDefault();
+
             CarritosRepo carritosRepo = new CarritosRepo();
-            var carrito = carritosRepo.Get(x => x.idCarrito == pedido.idCarrito).FirstOrDefault();
+            CarritosModel carrito = carritosRepo.Get(x => x.idCarrito == pedido.idCarrito).FirstOrDefault();
+
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string templatePath = System.IO.Path.Combine(basePath, "..\\Data\\Templates\\FacturaLayout.html");
+            string template = System.IO.File.ReadAllText(templatePath);
+
+            string listadoProductos = "";
+
+            foreach (var item in carrito.Productos)
+            {
+                listadoProductos +=
+                    $"<tr style=\"border-collapse:collapse\">" +
+                        $"<td style=\"padding:5px 10px 5px 0;Margin:0\" width=\"80%\" align=\"left\">" +
+                            $"{item.Nombre}({item.CantidadEnCarrito})" +
+                        $"</td>" +
+                        $"<td style=\"padding:5px 0;Margin:0\" width=\"20%\" align=\"left\">" +
+                            $"${item.Precio.ToString("0.##")}" +
+                        $"</td>" +
+                    $"</tr>";
+            }
+
+            template = Regex.Replace(template, "{{Nombre}}", usuario.NombreUsuario);
+            template = Regex.Replace(template, "{{numOrden}}", (pedido.idPedido).ToString());
+            template = Regex.Replace(template, "{{Productos}}", listadoProductos);
+            template = Regex.Replace(template, "{{Total}}", (pedido.MontoPagado).ToString());
+            template = Regex.Replace(template, "{{Direccion}}", direccion.Direccion);
+            template = Regex.Replace(template, "{{Ciudad}}", direccion.Ciudad);
+            template = Regex.Replace(template, "{{CodigoPostal}}", direccion.CodigoPostal);
+            template = Regex.Replace(template, "{{fechaEntrega}}", DateTime.Now.ToLongDateString());
+            return template;
+        }
+
+        public string genFactura(PedidosModel pedido)
+        {
+            UsuariosRepo usuariosRepo = new UsuariosRepo();
+            DireccionesRepo direccionesRepo = new DireccionesRepo();
+
+            UsuariosModel usuario = usuariosRepo.Get(x => x.idUsuario == pedido.idUsuario).FirstOrDefault();
+            DireccionesModel direccion = direccionesRepo.Get(x => x.idDireccion == pedido.idDireccion).FirstOrDefault();
+
+            CarritosRepo carritosRepo = new CarritosRepo();
+            CarritosModel carrito = carritosRepo.Get(x => x.idCarrito == pedido.idCarrito).FirstOrDefault();
 
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string templatePath = System.IO.Path.Combine(basePath, "..\\Data\\Templates\\FacturaLayout.html");
@@ -39,10 +86,10 @@ namespace Data.Common
                     $"</tr>";
             }
 
-            template = Regex.Replace(template, "{{Nombre}}", usuariosModel.NombreUsuario);
+            template = Regex.Replace(template, "{{Nombre}}", usuario.NombreUsuario);
             template = Regex.Replace(template, "{{numOrden}}", (pedido.idPedido).ToString());
             template = Regex.Replace(template, "{{Productos}}", listadoProductos);
-            template = Regex.Replace(template, "{{Total}}", (pedido.MontoPagado).ToString());
+            template = Regex.Replace(template, "{{Total}}", (pedido.MontoPagado).ToString("0.##"));
             template = Regex.Replace(template, "{{Direccion}}", direccion.Direccion);
             template = Regex.Replace(template, "{{Ciudad}}", direccion.Ciudad);
             template = Regex.Replace(template, "{{CodigoPostal}}", direccion.CodigoPostal);
@@ -50,10 +97,14 @@ namespace Data.Common
             return template;
         }
 
-        public void SendFacturaMail(PedidosModel pedido, DireccionesModel direccion, UsuariosModel usuariosModel)
+        public void SendFacturaMail(Pedidos pedido)
         {
-            string body = genFactura(pedido, direccion, usuariosModel);
-            SendEmail(usuariosModel.CorreoElectronico, "Su pedido ha sido procesado con éxito.", body);
+            string body = genFactura(pedido);
+
+            UsuariosRepo usuariosRepo = new UsuariosRepo();
+            UsuariosModel usuario = usuariosRepo.Get(x => x.idUsuario == pedido.idUsuario).FirstOrDefault();
+
+            SendEmail(usuario.CorreoElectronico, "Su pedido ha sido procesado con éxito.", body);
         }
 
         public void SendEmail(string to, string subject, string body)

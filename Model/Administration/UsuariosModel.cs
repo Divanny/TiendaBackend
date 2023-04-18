@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Model.Common
 {
@@ -28,5 +29,7 @@ namespace Model.Common
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string Telefono { get; set; }
+        [FileSize(1048576, ErrorMessage = "El archivo no puede ser mayor de 1 MB.")]
+        public HttpPostedFileBase FotoPerfil { get; set; }
     }
 }

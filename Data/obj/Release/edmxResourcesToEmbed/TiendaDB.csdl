@@ -135,9 +135,9 @@
     <Property Name="idMetodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idUsuario" Type="Int32" Nullable="false" />
     <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Numero" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="FechaExpiracion" Type="DateTime" Precision="0" />
-    <Property Name="CVV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CVV" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="EsPrincipal" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Pedidos">
@@ -152,6 +152,7 @@
     <Property Name="MontoPagado" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
     <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="FechaUltimoEstado" Type="DateTime" Precision="3" />
+    <Property Name="idDireccion" Type="Int32" />
   </EntityType>
   <EntityType Name="Productos">
     <Key>
