@@ -18,6 +18,7 @@ namespace WebAPI.Controllers
     [RoutePrefix("api/Carritos")]
     public class CarritosController : ApiBaseController
     {
+        TiendaDBEntities dbContext = new TiendaDBEntities();
         CarritosRepo carritosRepo = new CarritosRepo();
 
         /// <summary>
@@ -70,18 +71,44 @@ namespace WebAPI.Controllers
         [Route("InsertarProducto")]
         public OperationResult InsertarProducto(int idProducto, int cantidad, int precioPorProducto)
         {
-            CarritosModel carrito = GetActualCarrito();
-            if (precioPorProducto == 0)
+            using (var trx = dbContext.Database.BeginTransaction())
             {
-                ProductosRepo productosRepo = new ProductosRepo();
-                var producto = productosRepo.Get(idProducto);
-                precioPorProducto = (int)producto.Precio; // OJO CAMBIAR A DECIMAL (precioPorProducto)
+                try
+                {
+                    CarritosModel carrito = GetActualCarrito();
+
+                    if (carrito == null)
+                    {
+                        CarritosModel carritoNew = new CarritosModel()
+                        {
+                            idUsuario = OnlineUser.GetUserId(),
+                            FechaCreacion = DateTime.Now,
+                            EstaTerminado = false
+                        };
+
+                        var carritoCreated = carritosRepo.Add(carritoNew);
+                        carrito = GetActualCarrito();
+                    }
+
+                    if (precioPorProducto == 0)
+                    {
+                        ProductosRepo productosRepo = new ProductosRepo();
+                        var producto = productosRepo.Get(idProducto);
+                        precioPorProducto = (int)producto.Precio; // OJO CAMBIAR A DECIMAL (precioPorProducto)
+                    }
+
+                    cantidad = (cantidad == 0) ? 1 : cantidad;
+
+                    var result = carritosRepo.InsertarProductos(carrito.idCarrito, idProducto, cantidad, precioPorProducto);
+                    trx.Commit();
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    trx.Rollback();
+                    return new OperationResult(false, "Error 500 - Internal server error");
+                }
             }
-
-            cantidad = (cantidad == 0) ? 1 : cantidad;
-
-            var result = carritosRepo.InsertarProductos(carrito.idCarrito, idProducto, cantidad, precioPorProducto);
-            return result;
         }
 
         /// <summary>
@@ -95,10 +122,34 @@ namespace WebAPI.Controllers
         [Route("RemoverProductos")]
         public OperationResult RemoverProductos(int idProducto, int cantidad)
         {
-            CarritosModel carrito = GetActualCarrito();
+            using (var trx = dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    CarritosModel carrito = GetActualCarrito();
 
-            var result = carritosRepo.RemoverProductos(carrito.idCarrito, idProducto, cantidad);
-            return result;
+                    if (carrito == null)
+                    {
+                        CarritosModel carritoNew = new CarritosModel()
+                        {
+                            idUsuario = OnlineUser.GetUserId(),
+                            FechaCreacion = DateTime.Now,
+                            EstaTerminado = false
+                        };
+
+                        var carritoCreated = carritosRepo.Add(carritoNew);
+                        carrito = GetActualCarrito();
+                    }
+
+                    var result = carritosRepo.RemoverProductos(carrito.idCarrito, idProducto, cantidad);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    trx.Rollback();
+                    return new OperationResult(false, "Error 500 - Internal server error");
+                }
+            }
         }
     }
 }
