@@ -33,7 +33,8 @@ namespace Data
                 idPerfil = u.idPerfil,
                 idEstado = u.idEstado,
                 FechaRegistro = u.FechaRegistro,
-                UltimoIngreso = u.UltimoIngreso
+                UltimoIngreso = u.UltimoIngreso,
+                FotoUrl = u.FotoUrl
             }),
             (DB, filter) => (from u in DB.Set<Usuarios>().Where(filter)
                              join p in DB.Set<Perfiles>() on u.idPerfil equals p.idPerfil
@@ -51,7 +52,8 @@ namespace Data
                                  idEstado = u.idEstado,
                                  Estado = e.Nombre,
                                  FechaRegistro = u.FechaRegistro,
-                                 UltimoIngreso = u.UltimoIngreso
+                                 UltimoIngreso = u.UltimoIngreso,
+                                 FotoUrl = u.FotoUrl
                              })
         )
         { }

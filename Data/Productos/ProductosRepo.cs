@@ -22,11 +22,14 @@ namespace Data
                 Nombre = p.Nombre,
                 Descripcion = p.Descripcion,
                 Cantidad = p.CantidadStock,
-                EstaActivo = p.EstaActivo
+                EstaActivo = p.EstaActivo,
+                FotoUrl = p.FotoUrl,
             }),
             (DB, filter) => (from p in DB.Set<Productos>().Where(filter)
-                             join pc in DB.Set<ProductosCategorias>() on p.idProducto equals pc.idProducto
-                             join c in DB.Set<Categorias>() on pc.idCategoria equals c.idCategoria
+                             join pc in DB.Set<ProductosCategorias>() on p.idProducto equals pc.idProducto into productosCategorias
+                             from pc in productosCategorias.DefaultIfEmpty()
+                             join c in DB.Set<Categorias>() on pc.idCategoria equals c.idCategoria into categorias
+                             from c in categorias.DefaultIfEmpty()
                              select new
                              {
                                  Producto = p,
@@ -47,7 +50,8 @@ namespace Data
                                  {
                                      idCategoria = x.Categoria.idCategoria,
                                      Nombre = x.Categoria.Nombre
-                                 })
+                                 }),
+                                 FotoUrl = g.Key.FotoUrl,
                              })
         )
         {

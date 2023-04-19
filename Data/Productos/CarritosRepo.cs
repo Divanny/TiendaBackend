@@ -26,9 +26,11 @@ namespace Data
                 EstaTerminado = p.EstaTerminado,
             }),
             (DB, filter) => (from c in DB.Set<Carritos>().Where(filter)
-                 join cp in DB.Set<CarritosProductos>() on c.idCarrito equals cp.idCarrito
-                 join p in DB.Set<Productos>() on cp.idProducto equals p.idProducto
-                 select new
+                join cp in DB.Set<CarritosProductos>() on c.idCarrito equals cp.idCarrito into carritosProductos
+                from cp in carritosProductos.DefaultIfEmpty()
+                join p in DB.Set<Productos>() on cp?.idProducto equals p.idProducto into productos
+                from p in productos.DefaultIfEmpty()
+                select new
                  {
                      Carrito = c,
                      Producto = p,
@@ -43,15 +45,15 @@ namespace Data
                                  EstaTerminado = g.Key.EstaTerminado,
                                  Productos = g.Select(x => new ProductosModel()
                                  {
-                                     idProducto = x.Producto.idProducto,
-                                     Nombre = x.Producto.Nombre,
-                                     Descripcion = x.Producto.Descripcion,
-                                     CantidadStock = x.Producto.Cantidad,
-                                     Valoracion = (x.Producto.SumaValoraciones > 0) ? (x.Producto.SumaValoraciones / x.Producto.CantidadValoraciones) : (0),
-                                     FechaIngreso = x.Producto.FechaIngreso,
-                                     Precio = x.CarritosProductos.PrecioPorProducto, // Precio que tiene CarritosProductos.PrecioPorProducto
-                                     CantidadEnCarrito = x.CarritosProductos.Cantidad, // Cantidad que tiene CarritosProductos.Cantidad
-                                     EstaActivo = x.Producto.EstaActivo,
+                                     idProducto = x.Producto?.idProducto ?? 0,
+                                     Nombre = x.Producto?.Nombre,
+                                     Descripcion = x.Producto?.Descripcion,
+                                     CantidadStock = x.Producto?.Cantidad ?? 0,
+                                     Valoracion = ((x.Producto?.SumaValoraciones > 0) ? (x.Producto?.SumaValoraciones / x.Producto?.CantidadValoraciones) : (0)) ?? 0,
+                                     FechaIngreso = x.Producto?.FechaIngreso ?? DateTime.MinValue,
+                                     Precio = x.CarritosProductos?.PrecioPorProducto ?? 0,
+                                     CantidadEnCarrito = x.CarritosProductos?.Cantidad ?? 0,
+                                     EstaActivo = x.Producto?.EstaActivo ?? false,
                                  })
                              })
         )

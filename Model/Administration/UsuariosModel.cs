@@ -31,5 +31,6 @@ namespace Model.Common
         public string Telefono { get; set; }
         [FileSize(1048576, ErrorMessage = "El archivo no puede ser mayor de 1 MB.")]
         public HttpPostedFileBase FotoPerfil { get; set; }
+        public string FotoUrl { get; set; }
     }
 }

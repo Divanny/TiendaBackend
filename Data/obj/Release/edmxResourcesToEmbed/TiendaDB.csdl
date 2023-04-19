@@ -51,6 +51,7 @@
     <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Vistas">
     <Key>
@@ -167,6 +168,7 @@
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
     <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="EstaActivo" Type="Boolean" Nullable="false" />
+    <Property Name="FotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="ProductosCategorias">
     <Key>

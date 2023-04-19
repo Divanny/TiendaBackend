@@ -124,6 +124,7 @@
     <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
     <Property Name="EstaActivo" Type="bit" Nullable="false" />
+    <Property Name="FotoUrl" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="ProductosCategorias">
     <Key>
@@ -148,6 +149,7 @@
     <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Apellidos" Type="varchar" MaxLength="50" />
     <Property Name="Telefono" Type="varchar" MaxLength="50" />
+    <Property Name="FotoUrl" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Vistas">
     <Key>

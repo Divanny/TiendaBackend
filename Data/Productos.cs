@@ -23,5 +23,6 @@ namespace Data
         public int Cantidad { get; set; }
         public System.DateTime FechaIngreso { get; set; }
         public bool EstaActivo { get; set; }
+        public string FotoUrl { get; set; }
     }
 }

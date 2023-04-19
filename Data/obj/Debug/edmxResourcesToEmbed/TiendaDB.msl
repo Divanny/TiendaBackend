@@ -44,6 +44,7 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="TiendaDBModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="FotoUrl" ColumnName="FotoUrl" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
           <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
@@ -154,6 +155,7 @@
     <EntitySetMapping Name="Productos">
       <EntityTypeMapping TypeName="TiendaDBModel.Productos">
         <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="FotoUrl" ColumnName="FotoUrl" />
           <ScalarProperty Name="EstaActivo" ColumnName="EstaActivo" />
           <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />

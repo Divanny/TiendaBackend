@@ -129,6 +129,7 @@
           <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
           <Property Name="EstaActivo" Type="bit" Nullable="false" />
+          <Property Name="FotoUrl" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ProductosCategorias">
           <Key>
@@ -153,6 +154,7 @@
           <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Apellidos" Type="varchar" MaxLength="50" />
           <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="FotoUrl" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Vistas">
           <Key>
@@ -236,6 +238,7 @@
           <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Vistas">
           <Key>
@@ -352,6 +355,7 @@
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EstaActivo" Type="Boolean" Nullable="false" />
+          <Property Name="FotoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ProductosCategorias">
           <Key>
@@ -410,6 +414,7 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="TiendaDBModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="FotoUrl" ColumnName="FotoUrl" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
@@ -520,6 +525,7 @@
           <EntitySetMapping Name="Productos">
             <EntityTypeMapping TypeName="TiendaDBModel.Productos">
               <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="FotoUrl" ColumnName="FotoUrl" />
                 <ScalarProperty Name="EstaActivo" ColumnName="EstaActivo" />
                 <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />

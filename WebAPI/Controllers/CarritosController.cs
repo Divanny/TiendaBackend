@@ -55,7 +55,8 @@ namespace WebAPI.Controllers
         [Route("GetActualCarrito")]
         public CarritosModel GetActualCarrito()
         {
-            CarritosModel carrito = carritosRepo.Get(x => x.idUsuario == OnlineUser.GetUserId() && x.EstaTerminado == false).FirstOrDefault();
+            int idUsuario = OnlineUser.GetUserId();
+            CarritosModel carrito = carritosRepo.Get(x => x.idUsuario == idUsuario && x.EstaTerminado == false).First();
             return carrito;
         }
 
@@ -94,7 +95,7 @@ namespace WebAPI.Controllers
                     {
                         ProductosRepo productosRepo = new ProductosRepo();
                         var producto = productosRepo.Get(idProducto);
-                        precioPorProducto = (int)producto.Precio; // OJO CAMBIAR A DECIMAL (precioPorProducto)
+                        precioPorProducto = Convert.ToInt32(producto.Precio); // OJO CAMBIAR A DECIMAL (precioPorProducto)
                     }
 
                     cantidad = (cantidad == 0) ? 1 : cantidad;

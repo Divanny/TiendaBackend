@@ -32,5 +32,6 @@ namespace Model.Productos
         public int CantCategorias { get; set; }
         [FileSize(1048576, ErrorMessage = "El archivo no puede ser mayor de 1 MB.")]
         public HttpPostedFileBase Imagen { get; set; }
+        public string FotoUrl { get; set; }
     }
 }

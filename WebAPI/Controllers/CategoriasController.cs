@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         {
             if (ValidateModel(model))
             {
-                var ifExist = categoriasRepo.Get(x => x.Nombre == model.Nombre);
+                var ifExist = categoriasRepo.Get(x => x.Nombre == model.Nombre).FirstOrDefault();
 
                 if (ifExist != null)
                 {

@@ -107,6 +107,7 @@ namespace WebAPI.Controllers
         public OperationResult Put(int idDireccion, [FromBody]DireccionesModel model)
         {
             model.idUsuario = (model.idUsuario == 0) ? Infraestructure.OnlineUser.GetUserId() : model.idUsuario;
+            model.idDireccion = idDireccion;
 
             if (ValidateModel(model))
             {
