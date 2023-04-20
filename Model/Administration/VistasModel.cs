@@ -8,5 +8,6 @@
         public string URL { get; set; }
         public bool Principal { get; set; }
         public bool Permiso { get; set; }
+        public string Icon { get; set; }
     }
 }

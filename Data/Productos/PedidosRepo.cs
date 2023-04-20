@@ -39,17 +39,21 @@ namespace Data
             }),
             (DB, filter) => (from p in DB.Set<Pedidos>().Where(filter)
                              join m in DB.Set<MetodosPagoUsuarios>() on p.idMetodo equals m.idMetodo
+                             join u in DB.Set<Usuarios>() on p.idUsuario equals u.idUsuario
+                             join d in DB.Set<DireccionesUsuarios>() on p.idDireccion equals d.idDireccion
                              join e in DB.Set<EstadosPedidos>() on p.idEstado equals e.idEstado
                              select new PedidosModel()
                              {
                                  idPedido = p.idPedido,
                                  idUsuario = p.idUsuario,
+                                 NombreUsuario = u.NombreUsuario,
                                  idCarrito = p.idCarrito,
                                  idEstado = p.idEstado,
                                  Estado = e.Nombre,
                                  idMetodo = p.idMetodo,
                                  Metodo = m.Tipo,
                                  idDireccion = p.idDireccion,
+                                 Direccion = d.Direccion,
                                  MontoPagado = p.MontoPagado,
                                  FechaIngreso = p.FechaIngreso,
                                  FechaUltimoEstado = p.FechaUltimoEstado,

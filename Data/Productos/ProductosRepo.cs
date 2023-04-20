@@ -32,7 +32,7 @@ namespace Data
             (DB, filter) => (from p in DB.Set<Productos>().Where(filter)
                              join pc in DB.Set<ProductosCategorias>() on p.idProducto equals pc.idProducto into productosCategorias
                              from pc in productosCategorias.DefaultIfEmpty()
-                             join c in DB.Set<Categorias>() on pc.idCategoria equals c.idCategoria into categorias
+                             join c in DB.Set<Categorias>() on pc?.idCategoria equals c.idCategoria into categorias
                              from c in categorias.DefaultIfEmpty()
                              select new
                              {
@@ -50,12 +50,11 @@ namespace Data
                                  Valoracion = (g.Key.SumaValoraciones > 0) ? (g.Key.SumaValoraciones / g.Key.CantidadValoraciones) : (0),
                                  Precio = g.Key.Precio,
                                  FechaIngreso = g.Key.FechaIngreso,
-                                 EstaActivo = g.Key.EstaActivo,
                                  Categorias = g.Select(x => new CategoriasModel()
                                  {
-                                     idCategoria = x.Categoria.idCategoria,
-                                     Nombre = x.Categoria.Nombre,
-                                     PoseeCategoria = true
+                                     idCategoria = x.Categoria?.idCategoria ?? 0,
+                                     Nombre = x.Categoria?.Nombre,
+                                     PoseeCategoria = x.Categoria != null
                                  }),
                                  FotoUrl = g.Key.FotoUrl,
                              })

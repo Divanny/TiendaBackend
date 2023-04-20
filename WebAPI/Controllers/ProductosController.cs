@@ -26,7 +26,6 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Autorizar(AllowAnyProfile = true)]
         public List<ProductosModel> Get()
         {
             List<ProductosModel> productos = productosRepo.Get(x => x.EstaActivo == true).ToList();
@@ -37,7 +36,6 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Autorizar(AllowAnyProfile = true)]
         [Route("GetAllProducts")]
         public List<ProductosModel> GetAllProducts()
         {

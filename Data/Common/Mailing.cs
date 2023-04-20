@@ -10,6 +10,9 @@ using Model.Productos;
 using Model.Usuarios;
 using Model.Common;
 using iTextSharp.tool.xml.html;
+using System.Web;
+using System.Web.Hosting;
+using System.IO;
 
 namespace Data.Common
 {
@@ -26,8 +29,11 @@ namespace Data.Common
             CarritosRepo carritosRepo = new CarritosRepo();
             CarritosModel carrito = carritosRepo.Get(x => x.idCarrito == pedido.idCarrito).FirstOrDefault();
 
-            string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            string templatePath = System.IO.Path.Combine(basePath, "..\\Data\\Templates\\FacturaLayout.html");
+
+            string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\", "site\\wwwroot\\Templates\\FacturaLayout.html");
+
+            //string templatePath = HostingEnvironment.MapPath("~/Data/Templates/FacturaLayout.html");
+            //string templatePath = HttpContext.Current.Server.MapPath("~/Data/Templates/FacturaLayout.html");
             string template = System.IO.File.ReadAllText(templatePath);
 
             string listadoProductos = "";
@@ -67,8 +73,9 @@ namespace Data.Common
             CarritosRepo carritosRepo = new CarritosRepo();
             CarritosModel carrito = carritosRepo.Get(x => x.idCarrito == pedido.idCarrito).FirstOrDefault();
 
-            string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            string templatePath = System.IO.Path.Combine(basePath, "..\\Data\\Templates\\FacturaLayout.html");
+            //string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\", "site\\wwwroot\\Templates\\FacturaPDFLayout.html");
+
+            string templatePath = HttpContext.Current.Server.MapPath("~/Templates/FacturaPDFLayout.html");
             string template = System.IO.File.ReadAllText(templatePath);
 
             string listadoProductos = "";
@@ -78,10 +85,10 @@ namespace Data.Common
                 listadoProductos +=
                     $"<tr style=\"border-collapse:collapse\">" +
                         $"<td style=\"padding:5px 10px 5px 0;Margin:0\" width=\"80%\" align=\"left\">" +
-                            $"{item.Nombre}" +
+                            $"{item.Nombre}({item.CantidadEnCarrito})" +
                         $"</td>" +
                         $"<td style=\"padding:5px 0;Margin:0\" width=\"20%\" align=\"left\">" +
-                            $"{item.Precio}" +
+                            $"${item.Precio.ToString("0.##")}" +
                         $"</td>" +
                     $"</tr>";
             }

@@ -19,5 +19,6 @@ namespace Data
         public string Descripcion { get; set; }
         public string URL { get; set; }
         public bool Principal { get; set; }
+        public string Icon { get; set; }
     }
 }

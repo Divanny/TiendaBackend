@@ -12,12 +12,14 @@ namespace Model.Productos
     {
         public int idPedido { get; set; }
         public int idUsuario { get; set; }
+        public string NombreUsuario { get; set; }
         public int idCarrito { get; set; }
         public int idEstado { get; set; }
         public string Estado { get; set; }
         public int idMetodo { get; set; }
         public string Metodo { get; set; }
         public int? idDireccion { get; set; }
+        public string Direccion { get; set; }
         public decimal MontoPagado { get; set; }
         public System.DateTime FechaIngreso { get; set; }
         public Nullable<System.DateTime> FechaUltimoEstado { get; set; }

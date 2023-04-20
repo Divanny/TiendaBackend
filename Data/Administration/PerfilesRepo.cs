@@ -52,7 +52,8 @@ namespace Data
                        DescVista = v.Descripcion,
                        URL = v.URL,
                        Permiso = permisosSet.Any(a => a.idVista == v.idVista),
-                       Principal = v.Principal
+                       Principal = v.Principal,
+                       Icon = v.Icon
                    };
         }
         public IEnumerable<UsuariosModel> GetUsuarios(int idPerfil)
@@ -222,7 +223,8 @@ namespace Data
                        Vista = v.Nombre,
                        DescVista = v.Descripcion,
                        URL = v.URL,
-                       Principal = v.Principal
+                       Principal = v.Principal,
+                       Icon = v.Icon,
                    };
         }
     }

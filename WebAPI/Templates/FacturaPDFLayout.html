@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Factura de compra</title>
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+			margin: 50px auto;
+			max-width: 700px;
+			padding: 30px;
+		}
+		h1 {
+			color: #6c757d;
+			font-size: 24px;
+			margin-bottom: 30px;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.row {
+			display: flex;
+			flex-direction: row;
+			margin-bottom: 10px;
+		}
+		.col-6 {
+			flex: 0 0 50%;
+			max-width: 50%;
+			padding: 5px 10px;
+			text-align: right;
+		}
+		.col-6 span {
+			color: #6c757d;
+			display: block;
+			font-size: 16px;
+			font-weight: bold;
+			margin-bottom: 5px;
+			text-transform: uppercase;
+		}
+		.col-6 p {
+			margin: 0;
+		}
+		table {
+			border-collapse: collapse;
+			margin: 20px 0;
+			width: 100%;
+		}
+		table th, table td {
+			border: 1px solid #ccc;
+			padding: 10px;
+			text-align: left;
+		}
+		table th {
+			background-color: #6c757d;
+			color: #fff;
+			text-transform: uppercase;
+		}
+		table tfoot th {
+			text-align: right;
+		}
+		table tfoot td {
+			font-weight: bold;
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Factura de compra</h1>
+		<div class="row">
+			<div class="col-6">
+				<span>Nombre del cliente:</span>
+				<p>{{Nombre}}</p>
+			</div>
+			<div class="col-6">
+				<span>Número de orden:</span>
+				<p>{{numOrden}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<span>Fecha de entrega:</span>
+				<p>{{fechaEntrega}}</p>
+			</div>
+			<div class="col-6">
+				<span>Dirección de envío:</span>
+				<p>{{Direccion}}, {{Ciudad}}, {{CodigoPostal}}</p>
+			</div>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Producto</th>
+					<th>Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{Productos}}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>Total:</th>
+					<td>{{Total}}</td>
+				</tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

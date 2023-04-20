@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         /// Obtiene un listado de todos los pedidos.
         /// </summary>
         /// <returns></returns>
-        [Autorizar(AllowAnyProfile = true)]
+        [Autorizar(VistasEnum.GestionarPedidos)]
         [HttpGet]
         public List<PedidosModel> Get()
         {
@@ -175,10 +175,14 @@ namespace WebAPI.Controllers
                         Mailing mailing = new Mailing();
                         mailing.SendFacturaMail(created);
 
-                        return new OperationResult(true, "Se ha procesado el pago, gracias por su compra.", created);
+                        trx.Commit();
+
+                        return new OperationResult(true, "Se ha procesado el pago, gracias por su compra. <br>Puede revisar los detalles de la orden en su correo electrónico", created);
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        trx.Rollback();
+                        pedidosRepo.LogError(ex);
                         return new OperationResult(false, "Error al procesar el pago, intentelo nuevamente.");
                     }
                 }
@@ -195,7 +199,7 @@ namespace WebAPI.Controllers
         /// <param name="idPedido"></param>
         /// <param name="idEstado"></param>
         /// <returns></returns>
-        [Autorizar(AllowAnyProfile = true)]
+        [Autorizar(VistasEnum.GestionarPedidos)]
         [HttpPut]
         [Route("CambiarEstado")]
         public OperationResult CambiarEstatus(int idPedido, int idEstado)

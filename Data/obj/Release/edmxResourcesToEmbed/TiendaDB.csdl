@@ -62,6 +62,7 @@
     <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="URL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Principal" Type="Boolean" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="TiendaDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="EstadosUsuarios" EntityType="Self.EstadosUsuarios" />

@@ -177,6 +177,7 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="200" />
           <Property Name="URL" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Principal" Type="bit" Nullable="false" />
+          <Property Name="Icon" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityContainer Name="TiendaDBModelStoreContainer">
           <EntitySet Name="Carritos" EntityType="Self.Carritos" Schema="dbo" store:Type="Tables" />
@@ -262,6 +263,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="URL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Principal" Type="Boolean" Nullable="false" />
+          <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="TiendaDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="EstadosUsuarios" EntityType="Self.EstadosUsuarios" />
@@ -458,6 +460,7 @@
           <EntitySetMapping Name="Vistas">
             <EntityTypeMapping TypeName="TiendaDBModel.Vistas">
               <MappingFragment StoreEntitySet="Vistas">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="idVista" ColumnName="idVista" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

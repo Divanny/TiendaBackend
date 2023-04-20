@@ -62,6 +62,7 @@
     <EntitySetMapping Name="Vistas">
       <EntityTypeMapping TypeName="TiendaDBModel.Vistas">
         <MappingFragment StoreEntitySet="Vistas">
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="idVista" ColumnName="idVista" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

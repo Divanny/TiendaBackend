@@ -26,7 +26,6 @@ namespace WebAPI.Controllers
         /// Obtiene un listado de todos las categorias del sistema.
         /// </summary>
         /// <returns></returns>
-        [Autorizar(AllowAnyProfile = true)]
         [HttpGet]
         public List<CategoriasModel> Get()
         {
@@ -38,7 +37,6 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="idCategoria"></param>
         /// <returns></returns>onarPerfiles)]
-        [Autorizar(AllowAnyProfile = true)]
         [HttpGet]
         public CategoriasModel Get(int idCategoria)
         {
@@ -50,7 +48,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [Autorizar(VistasEnum.GestionarProductos)]
+        [Autorizar(VistasEnum.GestionarCategorias)]
         [HttpPost]
         public OperationResult Post(CategoriasModel model)
         {
@@ -86,7 +84,7 @@ namespace WebAPI.Controllers
         /// <param name="idCategoria"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [Autorizar(VistasEnum.GestionarProductos)]
+        [Autorizar(VistasEnum.GestionarCategorias)]
         [HttpPut]
         public OperationResult Put(int idCategoria, CategoriasModel model)
         {
@@ -117,14 +115,12 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="idCategoria"></param>
         /// <returns></returns>
-        [Autorizar(VistasEnum.GestionarProductos)]
+        [Autorizar(VistasEnum.GestionarCategorias)]
         [HttpDelete]
         public OperationResult Delete(int idCategoria)
         {
             try
             {
-                var a = 0;
-                var x = 10 / a;
                 categoriasRepo.Delete(idCategoria);
                 categoriasRepo.Log(idCategoria);
                 return new OperationResult(true, "Se ha eliminado satisfactoriamente");

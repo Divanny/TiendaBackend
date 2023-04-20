@@ -172,6 +172,7 @@
     <Property Name="Descripcion" Type="varchar" MaxLength="200" />
     <Property Name="URL" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="Principal" Type="bit" Nullable="false" />
+    <Property Name="Icon" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityContainer Name="TiendaDBModelStoreContainer">
     <EntitySet Name="Carritos" EntityType="Self.Carritos" Schema="dbo" store:Type="Tables" />
