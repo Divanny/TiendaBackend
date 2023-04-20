@@ -73,9 +73,9 @@ namespace Data.Common
             CarritosRepo carritosRepo = new CarritosRepo();
             CarritosModel carrito = carritosRepo.Get(x => x.idCarrito == pedido.idCarrito).FirstOrDefault();
 
-            //string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\", "site\\wwwroot\\Templates\\FacturaPDFLayout.html");
+            string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\", "site\\wwwroot\\Templates\\FacturaPDFLayout.html");
 
-            string templatePath = HttpContext.Current.Server.MapPath("~/Templates/FacturaPDFLayout.html");
+            //string templatePath = HttpContext.Current.Server.MapPath("~/Templates/FacturaPDFLayout.html");
             string template = System.IO.File.ReadAllText(templatePath);
 
             string listadoProductos = "";
