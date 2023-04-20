@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         [Autorizar(AllowAnyProfile = true)]
         [Route("InsertarProducto")]
-        public OperationResult InsertarProducto(int idProducto, int cantidad, int precioPorProducto)
+        public OperationResult InsertarProducto(int idProducto, int cantidad, decimal precioPorProducto)
         {
             using (var trx = dbContext.Database.BeginTransaction())
             {
@@ -95,7 +95,7 @@ namespace WebAPI.Controllers
                     {
                         ProductosRepo productosRepo = new ProductosRepo();
                         var producto = productosRepo.Get(idProducto);
-                        precioPorProducto = Convert.ToInt32(producto.Precio); // OJO CAMBIAR A DECIMAL (precioPorProducto)
+                        precioPorProducto = producto.Precio;
                     }
 
                     cantidad = (cantidad == 0) ? 1 : cantidad;
@@ -106,6 +106,7 @@ namespace WebAPI.Controllers
                 }
                 catch (Exception ex)
                 {
+                    carritosRepo.LogError(ex);
                     trx.Rollback();
                     return new OperationResult(false, "Error 500 - Internal server error");
                 }
@@ -147,6 +148,7 @@ namespace WebAPI.Controllers
                 }
                 catch (Exception ex)
                 {
+                    carritosRepo.LogError(ex);
                     trx.Rollback();
                     return new OperationResult(false, "Error 500 - Internal server error");
                 }

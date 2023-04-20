@@ -40,5 +40,6 @@ namespace Data
         public virtual DbSet<Pedidos> Pedidos { get; set; }
         public virtual DbSet<Productos> Productos { get; set; }
         public virtual DbSet<ProductosCategorias> ProductosCategorias { get; set; }
+        public virtual DbSet<LogError> LogError { get; set; }
     }
 }

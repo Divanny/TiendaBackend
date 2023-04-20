@@ -505,7 +505,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebAPI.Controllers.CarritosController.InsertarProducto(System.Int32,System.Int32,System.Int32)">
+        <member name="M:WebAPI.Controllers.CarritosController.InsertarProducto(System.Int32,System.Int32,System.Decimal)">
             <summary>
             Inserta un producto al carrito actual del usuario. (Parámetro precioPorProducto, puede ser 0 y tomará el precio actual del producto)
             </summary>
@@ -670,6 +670,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:WebAPI.Controllers.ProductosController.GetAllProducts">
+            <summary>
+            Obtiene un listado de todos los productos (incluyendo inactivos.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WebAPI.Controllers.ProductosController.Get(System.Int32)">
             <summary>
             Obtiene un producto en específico.
@@ -690,6 +696,13 @@
             </summary>
             <param name="idProducto"></param>
             <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.ProductosController.Delete(System.Int32)">
+            <summary>
+            Elimina un producto.
+            </summary>
+            <param name="idProducto"></param>
             <returns></returns>
         </member>
         <member name="M:WebAPI.Controllers.ProductosController.GetCategorias">
@@ -735,6 +748,20 @@
         <member name="M:WebAPI.Controllers.PerfilesController.Delete(System.Int32)">
             <summary>
             Elimina un perfil.
+            </summary>
+            <param name="idPerfil"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PerfilesController.GetUsuarios(System.Int32)">
+            <summary>
+            Obtiene un listado de usuarios de un perfil.
+            </summary>
+            <param name="idPerfil"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPI.Controllers.PerfilesController.GetPermisos(System.Int32)">
+            <summary>
+            Obtiene un listado de permisos de un perfil.
             </summary>
             <param name="idPerfil"></param>
             <returns></returns>

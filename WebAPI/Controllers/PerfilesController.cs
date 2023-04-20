@@ -28,7 +28,14 @@ namespace WebAPI.Controllers
         [HttpGet]
         public List<PerfilesModel> Get()
         {
-            return perfilesRepo.Get().ToList();
+            List<PerfilesModel> perfiles = perfilesRepo.Get().ToList();
+            foreach(var item in perfiles) 
+            {
+                item.Usuarios = GetUsuarios(item.idPerfil);
+                item.Vistas = GetPermisos(item.idPerfil);
+            }
+            return perfiles;
+
         }
 
         /// <summary>
@@ -42,11 +49,11 @@ namespace WebAPI.Controllers
         {
             if (ValidateModel(model))
             {
-                var ifExist = perfilesRepo.Get(x => x.Nombre == model.Nombre);
+                var ifExist = perfilesRepo.Get(x => x.Nombre == model.Nombre).FirstOrDefault();
 
                 if (ifExist != null)
                 {
-                    return new OperationResult(false, "Este perfil ya existe", Validation.Errors);
+                    return new OperationResult(false, "Este perfil ya existe");
                 }
 
                 var created = perfilesRepo.Add(model);
@@ -69,7 +76,7 @@ namespace WebAPI.Controllers
         {
             if (ValidateModel(model))
             {
-                perfilesRepo.Edit(model, idPerfil);
+                perfilesRepo.Edit(model);
                 perfilesRepo.Log(model);
                 return new OperationResult(true, "Se ha actualizado satisfactoriamente", model);
             }
@@ -96,6 +103,33 @@ namespace WebAPI.Controllers
             {
                 return new OperationResult(false, "No se ha podido eliminar este perfil");
             }
+        }
+
+        /// <summary>
+        /// Obtiene un listado de usuarios de un perfil.
+        /// </summary>
+        /// <param name="idPerfil"></param>
+        /// <returns></returns>
+        [Autorizar(VistasEnum.GestionarPerfiles)]
+        [HttpGet]
+        [Route("GetUsuarios")]
+        public List<UsuariosModel> GetUsuarios(int idPerfil)
+        {
+            return perfilesRepo.GetUsuarios(idPerfil).ToList();
+        }
+
+
+        /// <summary>
+        /// Obtiene un listado de permisos de un perfil.
+        /// </summary>
+        /// <param name="idPerfil"></param>
+        /// <returns></returns>
+        [Autorizar(VistasEnum.GestionarPerfiles)]
+        [HttpGet]
+        [Route("GetPermisos")]
+        public List<VistasModel> GetPermisos(int idPerfil)
+        {
+            return perfilesRepo.GetPermisos(idPerfil).ToList();
         }
 
         /// <summary>

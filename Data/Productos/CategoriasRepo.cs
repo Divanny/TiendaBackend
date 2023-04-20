@@ -20,7 +20,7 @@ namespace Data
                 idCategoria = p.idCategoria,
                 Descripcion = p.Descripcion,
                 Nombre = p.Nombre,
-                FechaIngreso = p.FechaIngreso
+                FechaIngreso = p.FechaIngreso ?? DateTime.Now
             }),
             (DB, filter) =>  (from p in DB.Set<Categorias>().Where(filter)
                                 select new CategoriasModel()

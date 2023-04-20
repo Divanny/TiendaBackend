@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data;
+using Data.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +21,16 @@ namespace WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             base.Init();
+        }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            // Obtener la última excepción no controlada
+            Exception ex = Server.GetLastError();
+
+            // Loggear la excepción
+            var dbContext = new TiendaDBEntities();
+            Logger logger = new Logger(dbContext);
+            logger.LogError(ex);
         }
     }
 }

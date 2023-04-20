@@ -54,6 +54,7 @@ namespace Data
                                      Precio = x.CarritosProductos?.PrecioPorProducto ?? 0,
                                      CantidadEnCarrito = x.CarritosProductos?.Cantidad ?? 0,
                                      EstaActivo = x.Producto?.EstaActivo ?? false,
+                                     FotoUrl = x.Producto?.FotoUrl ?? "",
                                  })
                              })
         )
@@ -73,7 +74,7 @@ namespace Data
             var idProductos = poseeSet.Select(p => p.idProducto).ToList();
             return productosRepo.Get(x => idProductos.Contains(x.idProducto));
         }
-        public OperationResult InsertarProductos(int idCarrito, int idProducto, int cantidad, int precioPorProducto)
+        public OperationResult InsertarProductos(int idCarrito, int idProducto, int cantidad, decimal precioPorProducto)
         {
             var carritosProductos = dbContext.Set<CarritosProductos>().Where(x => x.idCarrito == idCarrito).ToList();
 

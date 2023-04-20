@@ -10,6 +10,7 @@ using System.Web.Http;
 using WebAPI.Infraestructure;
 using Model.Enum;
 using Model.Productos;
+using Data.Common;
 
 namespace WebAPI.Controllers
 {
@@ -25,7 +26,7 @@ namespace WebAPI.Controllers
         /// Obtiene un listado de todos las categorias del sistema.
         /// </summary>
         /// <returns></returns>
-        [Autorizar(VistasEnum.GestionarProductos)]
+        [Autorizar(AllowAnyProfile = true)]
         [HttpGet]
         public List<CategoriasModel> Get()
         {
@@ -37,7 +38,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="idCategoria"></param>
         /// <returns></returns>onarPerfiles)]
-        [Autorizar(VistasEnum.GestionarProductos)]
+        [Autorizar(AllowAnyProfile = true)]
         [HttpGet]
         public CategoriasModel Get(int idCategoria)
         {
@@ -53,21 +54,30 @@ namespace WebAPI.Controllers
         [HttpPost]
         public OperationResult Post(CategoriasModel model)
         {
-            if (ValidateModel(model))
+            try
             {
-                var ifExist = categoriasRepo.Get(x => x.Nombre == model.Nombre).FirstOrDefault();
-
-                if (ifExist != null)
+                if (ValidateModel(model))
                 {
-                    return new OperationResult(false, "Esta categoría ya existe", Validation.Errors);
-                }
+                    var ifExist = categoriasRepo.Get(x => x.Nombre == model.Nombre).FirstOrDefault();
 
-                var created = categoriasRepo.Add(model);
-                categoriasRepo.Log(created);
-                return new OperationResult(true, "Se ha creado satisfactoriamente", created);
+                    if (ifExist != null)
+                    {
+                        return new OperationResult(false, "Esta categoría ya existe", Validation.Errors);
+                    }
+
+                    model.FechaIngreso = DateTime.Now;
+                    var created = categoriasRepo.Add(model);
+                    categoriasRepo.Log(created);
+                    return new OperationResult(true, "Se ha creado satisfactoriamente", created);
+                }
+                else
+                    return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
             }
-            else
-                return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
+            catch (Exception ex)
+            {
+                categoriasRepo.LogError(ex);
+                return new OperationResult(false, "Error 500 - Internal server error");
+            }
         }
 
         /// <summary>
@@ -80,14 +90,26 @@ namespace WebAPI.Controllers
         [HttpPut]
         public OperationResult Put(int idCategoria, CategoriasModel model)
         {
-            if (ValidateModel(model))
+            try
             {
-                categoriasRepo.Edit(model, idCategoria);
-                categoriasRepo.Log(model);
-                return new OperationResult(true, "Se ha actualizado satisfactoriamente", model);
+                if (ValidateModel(model))
+                {
+                    var actualModel = categoriasRepo.Get(x => x.idCategoria == idCategoria).FirstOrDefault();
+                    model.FechaIngreso = actualModel.FechaIngreso;
+                    model.idCategoria = idCategoria;
+
+                    categoriasRepo.Edit(model, idCategoria);
+                    categoriasRepo.Log(model);
+                    return new OperationResult(true, "Se ha actualizado satisfactoriamente", model);
+                }
+                else
+                    return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
             }
-            else
-                return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
+            catch (Exception ex)
+            {
+                categoriasRepo.LogError(ex);
+                return new OperationResult(false, "Error 500 - Internal server error");
+            }
         }
 
         /// <summary>
@@ -101,13 +123,16 @@ namespace WebAPI.Controllers
         {
             try
             {
+                var a = 0;
+                var x = 10 / a;
                 categoriasRepo.Delete(idCategoria);
                 categoriasRepo.Log(idCategoria);
                 return new OperationResult(true, "Se ha eliminado satisfactoriamente");
             }
             catch (Exception ex)
             {
-                return new OperationResult(false, "No se ha podido eliminar este perfil");
+                categoriasRepo.LogError(ex);
+                return new OperationResult(false, "No se ha podido eliminar esta categoría");
             }
         }
     }

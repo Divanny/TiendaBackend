@@ -68,6 +68,18 @@
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="Data" Type="varchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="LogError">
+    <Key>
+      <PropertyRef Name="idError" />
+    </Key>
+    <Property Name="idError" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="FechaHora" Type="datetime" Nullable="false" />
+    <Property Name="Mensaje" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StackTrace" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Origen" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="MetodosPagoUsuarios">
     <Key>
       <PropertyRef Name="idMetodo" />
@@ -169,6 +181,7 @@
     <EntitySet Name="EstadosPedidos" EntityType="Self.EstadosPedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadosUsuarios" EntityType="Self.EstadosUsuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LogActividad" EntityType="Self.LogActividad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogError" EntityType="Self.LogError" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MetodosPagoUsuarios" EntityType="Self.MetodosPagoUsuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />

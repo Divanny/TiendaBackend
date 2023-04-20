@@ -210,6 +210,15 @@ namespace Data.Common
             logger.LogHttpRequest(id);
         }
         /// <summary>
+        /// Save a Log Error on DB
+        /// </summary>
+        /// <param name="model"></param>
+        /// <exception cref="Exception"></exception>
+        public virtual void LogError(Exception ex)
+        {
+            logger.LogError(ex);
+        }
+        /// <summary>
         /// Dispose DB Context instance
         /// </summary>
         public void Dispose()

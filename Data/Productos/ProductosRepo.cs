@@ -21,8 +21,12 @@ namespace Data
                 idProducto = p.idProducto,
                 Nombre = p.Nombre,
                 Descripcion = p.Descripcion,
-                Cantidad = p.CantidadStock,
                 EstaActivo = p.EstaActivo,
+                SumaValoraciones = p.SumaValoraciones,
+                CantidadValoraciones = p.CantidadValoraciones,
+                Cantidad = p.CantidadStock,
+                Precio = p.Precio,
+                FechaIngreso = p.FechaIngreso ?? DateTime.Now,
                 FotoUrl = p.FotoUrl,
             }),
             (DB, filter) => (from p in DB.Set<Productos>().Where(filter)
@@ -44,12 +48,14 @@ namespace Data
                                  CantCategorias = DB.Set<ProductosCategorias>().Count(a => a.idProducto == g.Key.idProducto),
                                  CantidadStock = g.Key.Cantidad,
                                  Valoracion = (g.Key.SumaValoraciones > 0) ? (g.Key.SumaValoraciones / g.Key.CantidadValoraciones) : (0),
+                                 Precio = g.Key.Precio,
                                  FechaIngreso = g.Key.FechaIngreso,
                                  EstaActivo = g.Key.EstaActivo,
                                  Categorias = g.Select(x => new CategoriasModel()
                                  {
                                      idCategoria = x.Categoria.idCategoria,
-                                     Nombre = x.Categoria.Nombre
+                                     Nombre = x.Categoria.Nombre,
+                                     PoseeCategoria = true
                                  }),
                                  FotoUrl = g.Key.FotoUrl,
                              })

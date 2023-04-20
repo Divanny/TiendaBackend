@@ -29,6 +29,18 @@ namespace WebAPI.Controllers
         [Autorizar(AllowAnyProfile = true)]
         public List<ProductosModel> Get()
         {
+            List<ProductosModel> productos = productosRepo.Get(x => x.EstaActivo == true).ToList();
+            return productos;
+        }
+        /// <summary>
+        /// Obtiene un listado de todos los productos (incluyendo inactivos.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Autorizar(AllowAnyProfile = true)]
+        [Route("GetAllProducts")]
+        public List<ProductosModel> GetAllProducts()
+        {
             List<ProductosModel> productos = productosRepo.Get().ToList();
             return productos;
         }
@@ -57,6 +69,10 @@ namespace WebAPI.Controllers
         {
             if (ValidateModel(model))
             {
+                model.FechaIngreso = DateTime.Now;
+                model.SumaValoraciones = 5;
+                model.CantidadValoraciones = 1;
+
                 var created = productosRepo.Add(model);
                 productosRepo.Log(created);
                 return new OperationResult(true, "Se ha creado satisfactoriamente", created);
@@ -77,12 +93,37 @@ namespace WebAPI.Controllers
         {
             if (ValidateModel(model))
             {
-                productosRepo.Edit(model, idProducto);
+                var actualModel = productosRepo.Get(x => x.idProducto == idProducto).FirstOrDefault();
+                model.FechaIngreso = actualModel.FechaIngreso;
+                model.idProducto = idProducto;
+                model.SumaValoraciones = actualModel.SumaValoraciones;
+                model.CantidadValoraciones = actualModel.CantidadValoraciones;
+                productosRepo.Edit(model);
                 productosRepo.Log(model);
                 return new OperationResult(true, "Se ha creado satisfactoriamente", model);
             }
             else
                 return new OperationResult(false, "Los datos suministrados no son válidos", Validation.Errors);
+        }
+
+        /// <summary>
+        /// Elimina un producto.
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Autorizar(VistasEnum.GestionarProductos)]
+        public OperationResult Delete(int idProducto)
+        {
+            try
+            {
+                productosRepo.Delete(idProducto);
+                return new OperationResult(true, "Se ha eliminado satisfactoriamente");
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(false, "Error al eliminar el producto");
+            }
         }
 
         /// <summary>

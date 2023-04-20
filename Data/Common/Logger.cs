@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,22 @@ namespace Data.Common
             //};
             //LogHttpRequest(log);
         }
+        public void LogError(Exception ex)
+        {
+            LogError log = new LogError()
+            {
+                idUsuario = OnlineUser.GetUserId(),
+                FechaHora = DateTime.Now,
+                Mensaje = ex.Message,
+                StackTrace = ex.StackTrace,
+                Origen = ex.Source,
+                Tipo = "Excepción de sistema"
+            };
+
+            dbContext.Set<LogError>().Add(log);
+            dbContext.SaveChanges();
+        }
+
         public void LogHttpRequest(LogActividad log)
         {
             dbContext.Set<LogActividad>().Add(log);

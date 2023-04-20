@@ -95,6 +95,9 @@
     <Compile Include="LogActividad.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="LogError.cs">
+      <DependentUpon>TiendaDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MetodosPagoUsuarios.cs">
       <DependentUpon>TiendaDB.tt</DependentUpon>
     </Compile>

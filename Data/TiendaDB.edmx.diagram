@@ -20,6 +20,7 @@
         <EntityTypeShape EntityType="TiendaDBModel.Pedidos" Width="1.5" PointX="8.75" PointY="7.75" />
         <EntityTypeShape EntityType="TiendaDBModel.Productos" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="TiendaDBModel.ProductosCategorias" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="TiendaDBModel.LogError" Width="1.5" PointX="0.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

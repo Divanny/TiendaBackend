@@ -79,6 +79,7 @@
     <EntitySet Name="Pedidos" EntityType="TiendaDBModel.Pedidos" />
     <EntitySet Name="Productos" EntityType="TiendaDBModel.Productos" />
     <EntitySet Name="ProductosCategorias" EntityType="TiendaDBModel.ProductosCategorias" />
+    <EntitySet Name="LogError" EntityType="TiendaDBModel.LogError" />
   </EntityContainer>
   <EntityType Name="Carritos">
     <Key>
@@ -177,5 +178,17 @@
     <Property Name="idProductoCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idProducto" Type="Int32" Nullable="false" />
     <Property Name="idCategoria" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogError">
+    <Key>
+      <PropertyRef Name="idError" />
+    </Key>
+    <Property Name="idError" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Mensaje" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StackTrace" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Origen" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

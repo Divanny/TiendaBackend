@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Model.Productos
 {
@@ -9,7 +10,7 @@ namespace Model.Productos
         public string Nombre { get; set; }
         [Required]
         public string Descripcion { get; set; }
-        public System.DateTime FechaIngreso { get; set; }
+        public DateTime? FechaIngreso { get; set; }
         public bool PoseeCategoria { get; set; }
     }
 }
